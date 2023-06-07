@@ -5,4 +5,9 @@ class LoginController extends Controller {
   final LoginStore store;
 
   LoginController({required this.store});
+
+  void closeKeyboardOnOutsideClick() {
+    store.focusNodeEmail.unfocus();
+    store.focusNodePassword.unfocus();
+  }
 }
