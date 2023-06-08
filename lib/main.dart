@@ -5,17 +5,14 @@ import 'package:visitants/app/features/home/presentation/home_module.dart';
 
 import 'package:visitants/module/module_app.dart';
 
-import 'app/depedency_injector/depedency_injector.dart';
 import 'app/features/login/presentation/login_module.dart';
-import 'app/features/login/presentation/pages/login_page.dart';
+
 import 'core/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // DepedencyInjector.start();
 
   runApp(ModuleApp(
     mainModule: LoginModule(),
