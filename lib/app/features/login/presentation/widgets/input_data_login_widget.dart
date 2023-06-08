@@ -22,8 +22,6 @@ class InputDataLoginWidget extends StatefulWidget {
 }
 
 class _InputDataLoginWidgetState extends State<InputDataLoginWidget> {
-  LoginController _controller = GetIt.I.get<LoginController>();
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
