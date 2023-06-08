@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:visitants/app/features/login/domain/failures/cant_realize_of_login_failure.dart';
 import 'package:visitants/app/features/login/domain/repositories/login_reposiutory_abstract.dart';
 import 'package:visitants/core/failure.dart';
 
 import '../data_sources/login_data_source_impl.dart';
-import '../models/login_model.dart';
 
 class LoginRepositoryImpl implements LoginRepositoryAbstract {
   final LoginDataSourceImpl dataSource;
@@ -24,7 +24,7 @@ class LoginRepositoryImpl implements LoginRepositoryAbstract {
   }
 
   @override
-  Future<Either<Failure, String>> signInLogin(
+  Future<Either<Failure, User>> signInLogin(
       {required String password, required String email}) async {
     try {
       final response =
