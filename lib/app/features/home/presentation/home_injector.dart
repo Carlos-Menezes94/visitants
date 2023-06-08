@@ -1,4 +1,6 @@
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
+import 'package:visitants/app/features/login/presentation/login_module.dart';
+import 'package:visitants/app/features/login/presentation/stores/login_store.dart';
 import '../../../../module/module_injector.dart';
 
 import 'controllers/home_controller.dart';
@@ -9,6 +11,7 @@ class HomeInjector extends ModuleInjector<HomeModule> {
   void controllers() {
     registerFactory(() => HomeController(
           store: get<HomeStore>(),
+          loginStore: LoginModule.to.injector.get<LoginStore>(),
         ));
   }
 

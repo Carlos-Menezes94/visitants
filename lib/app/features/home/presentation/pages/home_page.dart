@@ -53,7 +53,8 @@ class _HomePageState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Olá, Usuário"),
+                      Text(
+                          "Olá, ${controller.loginStore.firebaseAuth.value.currentUser!.email}"),
                       Text(formattedDateTime),
                     ],
                   ),
