@@ -7,11 +7,14 @@ class InputDataLoginWidget extends StatefulWidget {
   final String labelText;
   final FocusNode focusNode;
   final TextEditingController controller;
+
+  final void Function(String) textTextField;
   const InputDataLoginWidget({
     Key? key,
     required this.labelText,
     required this.controller,
     required this.focusNode,
+    required this.textTextField,
   }) : super(key: key);
 
   @override
@@ -26,10 +29,12 @@ class _InputDataLoginWidgetState extends State<InputDataLoginWidget> {
     return TextFormField(
       focusNode: widget.focusNode,
       controller: widget.controller,
+      onChanged: widget.textTextField,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-          labelText: widget.labelText,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        labelText: widget.labelText,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+      ),
       validator: (value) {
         if (value!.isEmpty) {
           return 'Please enter your ${widget.labelText}';

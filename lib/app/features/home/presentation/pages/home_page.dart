@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:visitants/features/visitor_registration/presentation/pages/visitor_registration_page.dart';
+import 'package:visitants/app/features/visitor_registration/presentation/pages/visitor_registration_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
-  final String title;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -40,37 +39,31 @@ class _HomePageState extends State<HomePage> {
              SizedBox(height: 100),
             Container(
               height: 40,
-              child: Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VisitorRegistrationPage()),
-                    );
-                  },
-                  child: Text("Cadastrar visitante"),
-                ),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VisitorRegistrationPage()),
+                  );
+                },
+                child: Text("Cadastrar visitante"),
               ),
             ),
             const SizedBox(height: 16),
             Container(
               height: 40,
-              child: Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Visitantes cadastrados"),
-                ),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("Visitantes cadastrados"),
               ),
             ),
             const SizedBox(height: 16),
             Container(
               height: 40,
-              child: Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Ligar para morador"),
-                ),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("Ligar para morador"),
               ),
             ),
           ],

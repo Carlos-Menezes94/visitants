@@ -18,9 +18,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.checkAuth(context);
+    });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +40,18 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: "E-mail",
                   controller: _controller.store.emailController,
                   focusNode: _controller.store.focusNodeEmail,
+                  textTextField: (value) {
+                    _controller.store.emailText = value;
+                  },
                 ),
                 SizedBox(height: 20),
                 InputDataLoginWidget(
                   labelText: "Senha",
                   controller: _controller.store.passwordController,
                   focusNode: _controller.store.focusNodePassword,
+                  textTextField: (value) {
+                    _controller.store.passwordText = value;
+                  },
                 ),
                 SizedBox(height: 60),
                 Container(
@@ -54,7 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.black),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _controller.signinLoginUserFirebase();
+                    },
                     child: Text(
                       "Entrar",
                       style: TextStyle(

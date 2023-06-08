@@ -4,12 +4,14 @@ import '../../../../../../core/response.dart';
 import 'login_data_source_abstract.dart';
 
 class LoginDataSourceImpl implements LoginDataSourceAbstract {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth authFirebase;
+
+  LoginDataSourceImpl({required this.authFirebase});
 
   @override
   Future<DataSourceResponse> logoutLogin() async {
-    await auth.signOut();
-    if (auth.currentUser == null) {
+    await authFirebase.signOut();
+    if (authFirebase.currentUser == null) {
       return DataSourceResponse(data: "", success: true);
     } else {
       return DataSourceResponse(data: "", success: false);
@@ -19,7 +21,7 @@ class LoginDataSourceImpl implements LoginDataSourceAbstract {
   @override
   Future<DataSourceResponse> registerLogin(
       {required String password, required String email}) async {
-    final response = await auth.createUserWithEmailAndPassword(
+    final response = await authFirebase.createUserWithEmailAndPassword(
         email: email, password: password);
     if (response.user != null) {
       return DataSourceResponse(data: response.user, success: true);
@@ -32,7 +34,7 @@ class LoginDataSourceImpl implements LoginDataSourceAbstract {
   Future<DataSourceResponse> signInLogin(
       {required String password, required String email}) async {
     final response =
-        await auth.signInWithEmailAndPassword(email: email, password: password);
+        await authFirebase.signInWithEmailAndPassword(email: email, password: password);
     if (response.user != null) {
       return DataSourceResponse(data: response.user, success: true);
     } else {
