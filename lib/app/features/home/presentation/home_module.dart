@@ -1,11 +1,14 @@
+import 'package:visitants/app/features/home/presentation/home_quick_actions.dart';
 import 'package:visitants/app/features/home/presentation/pages/home_page.dart';
+import 'package:visitants/module/quick_actions.dart';
 
 import '../../../../module/module.dart';
 import '../../../../module/module_injector.dart';
 import 'home_injector.dart';
 
-class HomeModule extends Module {
-  static Module get to => Module.get<HomeModule>();
+class HomeModule extends Module
+    with QuickActionsMixin<HomeModule, HomeQuickActions> {
+  static Module get to => Module.get<HomeModule>() as HomeModule;
 
   @override
   ModuleInjector get injector => HomeInjector();
@@ -17,4 +20,7 @@ class HomeModule extends Module {
   Map<String, RouteBuilder> get routes => {
         HomePage.routeName: (context, arguments) => HomePage(),
       };
+
+  @override
+  HomeQuickActions get actions => HomeQuickActions();
 }

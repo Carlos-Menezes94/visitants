@@ -15,10 +15,10 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class _HomePageState
+class HomePageState
     extends StatePage<HomeModule, HomePage, HomeController, HomeStore> {
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,13 @@ class _HomePageState
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Home")),
+        title: Center(
+            child: Text(
+          "Home",
+          style: TextStyle(color: Colors.white),
+        )),
         automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout),
@@ -63,11 +67,8 @@ class _HomePageState
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => VisitorRegistrationPage()),
-                        );
+                        LoginModule.to.navigator
+                            .pushNamed(VisitorRegistrationPage.routeName);
                       },
                       child: Text("Cadastrar visitante"),
                     ),
