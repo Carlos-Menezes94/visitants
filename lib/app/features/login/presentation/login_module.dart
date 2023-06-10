@@ -1,4 +1,3 @@
-
 import 'package:visitants/app/features/login/presentation/login_injector.dart';
 import 'package:visitants/app/features/login/presentation/pages/login_page.dart';
 import 'package:visitants/app/features/login/presentation/login_quick_actions.dart';
@@ -6,7 +5,7 @@ import 'package:visitants/app/features/login/presentation/login_quick_actions.da
 import '../../../../module/module.dart';
 import '../../../../module/module_injector.dart';
 import '../../../../module/quick_actions.dart';
-import '../../home/presentation/home_injector.dart';
+
 
 class LoginModule extends Module
     with QuickActionsMixin<LoginModule, LoginQuickActions> {

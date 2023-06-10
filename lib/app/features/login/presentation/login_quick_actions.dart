@@ -23,19 +23,17 @@ class LoginQuickActions extends QuickActions<LoginModule> {
     checkAuth();
   }
 
-  void checkAuth() async {
+  Future<void> checkAuth() async {
     final store = injector.get<LoginStore>();
-
+    User? user;
     store.state.value = AppState.loading();
 
-    User? user;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    _auth.authStateChanges().listen((User? userInital) {
-      user = (userInital == null) ? null : userInital;
+    store.firebaseAuth.value.authStateChanges().listen((User? userInital) {
+      user = ((userInital == null) ? null : userInital);
     });
 
-    if (_auth.currentUser == null) {
+    if (store.firebaseAuth.value.currentUser == null) {
       LoginModule.to.navigator.pushNamed(LoginPage.routeName);
       Future.delayed(Duration(seconds: 3), () {
         store.state.value = AppState.error();

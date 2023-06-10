@@ -42,7 +42,10 @@ class LoginPageState
             valueListenable: controller.store.state,
             builder: (context, state, child) {
               if (state.isLoading()) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.black,
+                ));
               }
               return Padding(
                 padding: EdgeInsets.all(8.0),
