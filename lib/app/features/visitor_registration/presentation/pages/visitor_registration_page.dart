@@ -1,36 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:visitants/app/features/visitor_registration/presentation/controllers/visitor_registration_controller.dart';
+import 'package:visitants/app/features/visitor_registration/presentation/stores/visitor_registration_store.dart';
+import 'package:visitants/app/features/visitor_registration/presentation/visitor_registration_module.dart';
+import 'package:visitants/core/state.dart';
 
 class VisitorRegistrationPage extends StatefulWidget {
-  const VisitorRegistrationPage({super.key});
+  static const String routeName = '/VisitorRegistrationPage';
+
+  // const VisitorRegistrationPage({super.key});
+  const VisitorRegistrationPage({Key? key}) : super(key: key);
 
   @override
   State<VisitorRegistrationPage> createState() =>
-      _VisitorRegistrationPageState();
+      VisitorRegistrationPageState();
 }
 
-class _VisitorRegistrationPageState extends State<VisitorRegistrationPage> {
+class VisitorRegistrationPageState extends StatePage<
+    VisitorRegistrationModule,
+    VisitorRegistrationPage,
+    VisitorRegistrationController,
+    VisitorRegistrationStore> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _cpfController = TextEditingController();
-  TextEditingController _visitLocationController = TextEditingController();
-  TextEditingController _carPlateController = TextEditingController();
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-
-      // String name = _nameController.text;
-      // String cpf = _cpfController.text;
-      // String visitLocation = _visitLocationController.text;
-      // String carPlate = _carPlateController.text;
-
-      _nameController.clear();
-      _cpfController.clear();
-      _visitLocationController.clear();
-      _carPlateController.clear();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Formulário enviado com sucesso!')),
-      );
+      controller.registerNewVisitor(context);
     }
   }
 
@@ -39,6 +33,13 @@ class _VisitorRegistrationPageState extends State<VisitorRegistrationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cadastro de Visitante'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            controller.clearTextField();
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -47,7 +48,7 @@ class _VisitorRegistrationPageState extends State<VisitorRegistrationPage> {
           child: Column(
             children: [
               TextFormField(
-                controller: _nameController,
+                controller: controller.store.nameController,
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -57,7 +58,7 @@ class _VisitorRegistrationPageState extends State<VisitorRegistrationPage> {
                 },
               ),
               TextFormField(
-                controller: _cpfController,
+                controller: controller.store.cpfController,
                 decoration: InputDecoration(labelText: 'CPF'),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -67,7 +68,7 @@ class _VisitorRegistrationPageState extends State<VisitorRegistrationPage> {
                 },
               ),
               TextFormField(
-                controller: _visitLocationController,
+                controller: controller.store.visitLocationController,
                 decoration: InputDecoration(labelText: 'Local a visitar'),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -77,7 +78,7 @@ class _VisitorRegistrationPageState extends State<VisitorRegistrationPage> {
                 },
               ),
               TextFormField(
-                controller: _carPlateController,
+                controller: controller.store.carPlateController,
                 decoration: InputDecoration(labelText: 'Placa do carro'),
               ),
               ElevatedButton(
