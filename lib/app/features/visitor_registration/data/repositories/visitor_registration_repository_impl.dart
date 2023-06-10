@@ -12,11 +12,15 @@ class VisitorRegistrationRepositoryImpl
 
   VisitorRegistrationRepositoryImpl({required this.dataSource});
   @override
-  Future<Either<Failure, VisitorModel>> createdNewVisitor(
+  Future<Either<Failure, String>> createdNewVisitor(
       {required VisitorModel visitor}) async {
     try {
       final response = await dataSource.registerNewVisitor(visitor);
-      return Right(response);
+      if (response.success) {
+        return Right(response.data.toString());
+      } else {
+        return Left(CantCreateNewVisitorFailure());
+      }
     } catch (error) {
       return Left(CantCreateNewVisitorFailure());
     }

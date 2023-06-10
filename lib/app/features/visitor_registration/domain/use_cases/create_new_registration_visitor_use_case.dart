@@ -9,7 +9,7 @@ class CreateNewRegistrationVisitorUseCase {
 
   CreateNewRegistrationVisitorUseCase({required this.repository});
 
-  Future<Either<Failure, VisitorModel>> registerVisitor({required VisitorModel visitor}) async {
+  Future<Either<Failure, String>> registerVisitor({required VisitorModel visitor}) async {
     return repository.createdNewVisitor(visitor: visitor);
   }
 }
