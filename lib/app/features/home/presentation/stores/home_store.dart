@@ -5,4 +5,6 @@ import '../../../../../core/app_state.dart';
 
 class HomeStore extends Store {
   ValueNotifier<AppState> state = ValueNotifier<AppState>(AppState());
+
+  bool isContactResidentWhatsApp = false;
 }
