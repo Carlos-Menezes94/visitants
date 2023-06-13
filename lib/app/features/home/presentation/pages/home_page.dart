@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/app/features/login/presentation/login_module.dart';
 import 'package:visitants/app/features/visitor_registration/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/core/state.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 
 import '../../../../../core/app_state.dart';
 import '../controllers/home_controller.dart';
