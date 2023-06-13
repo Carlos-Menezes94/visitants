@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/app/features/login/presentation/login_module.dart';
 import 'package:visitants/app/features/visitor_registration/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/core/state.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 
 import '../../../../../core/app_state.dart';
 import '../controllers/home_controller.dart';
@@ -85,15 +87,49 @@ class HomePageState
                   Container(
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: ((context) {
+                              return AlertDialog(
+                                content: const Text(
+                                    'Escolha como deseja falar com morador'),
+                                actions: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          store.isContactResidentWhatsApp =
+                                              true;
+                                          controller.contactResident();
+                                        },
+                                        child: const Text('WhatsApp'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          store.isContactResidentWhatsApp =
+                                              false;
+                                          controller.contactResident();
+                                        },
+                                        child: const Text('Ligação'),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            }));
+                      },
                       child: Text("Ligar para morador"),
                     ),
+                  ),
+                  SizedBox(
+                    height: 40,
                   ),
                 ],
               ),
             );
           }),
     );
-    ;
   }
 }
