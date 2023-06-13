@@ -17,21 +17,24 @@ class HomeController extends Controller {
     }
   }
 
-  void showContacts() async {
-    const url = 'content://com.android.contacts/contacts';
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
+  void showContacts() {
+    final Uri uri = Uri(
+      scheme: 'tel',
+      path: '',
+    );
+
+    launch(uri.toString());
   }
 
   void showWhatsApp() async {
-    const url = 'content://com.android.contacts/contacts';
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
+    String message = 'Olá, aqui é da portaria.';
+
+    String url = 'https://wa.me/?text=${Uri.encodeComponent(message)}';
+
+    if (await canLaunch(url)) {
+      await launch(url);
     } else {
-      throw 'Could not launch $url';
+      throw 'Não foi possível abrir o WhatsApp.';
     }
   }
 }
