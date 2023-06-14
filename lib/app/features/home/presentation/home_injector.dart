@@ -1,3 +1,7 @@
+import 'package:visitants/app/features/home/data/data_sources/home_data_source_impl.dart';
+import 'package:visitants/app/features/home/data/repositories/home_repository_impl.dart';
+import 'package:visitants/app/features/home/domain/usecases/create_new_registration_visitor_use_case.dart';
+import 'package:visitants/app/features/home/domain/usecases/get_list_visitor_usecase.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/app/features/login/presentation/login_module.dart';
 import 'package:visitants/app/features/login/presentation/stores/login_store.dart';
@@ -12,6 +16,10 @@ class HomeInjector extends ModuleInjector<HomeModule> {
     registerFactory(() => HomeController(
           store: get<HomeStore>(),
           loginStore: LoginModule.to.injector.get<LoginStore>(),
+          getListVisitorUsecase:
+              HomeModule.to.injector.get<GetListVisitorUsecase>(),
+          createNewRegistrationVisitorUseCase:
+              HomeModule.to.injector.get<CreateNewRegistrationVisitorUseCase>(),
         ));
   }
 
@@ -22,13 +30,13 @@ class HomeInjector extends ModuleInjector<HomeModule> {
 
   @override
   void datasources() {
-    // registerFactory(() => LoginDataSourceImpl());
+    registerFactory(() => HomeDataSourceImpl());
   }
 
   @override
   void repositories() {
-    // registerFactory(() => LoginRepositoryImpl(
-    //     dataSource: HomeModule.to.injector.get<LoginDataSourceImpl>()));
+    registerFactory(() => HomeRepositoryImpl(
+        dataSource: HomeModule.to.injector.get<HomeDataSourceImpl>()));
   }
 
   @override
@@ -38,7 +46,9 @@ class HomeInjector extends ModuleInjector<HomeModule> {
 
   @override
   void usecases() {
-    // registerFactory(() => SignInLoginUseCase(
-    //     repository: HomeModule.to.injector.get<LoginRepositoryImpl>()));
+    registerFactory(() => GetListVisitorUsecase(
+        repository: HomeModule.to.injector.get<HomeRepositoryImpl>()));
+    registerFactory(() => CreateNewRegistrationVisitorUseCase(
+        repository: HomeModule.to.injector.get<HomeRepositoryImpl>()));
   }
 }

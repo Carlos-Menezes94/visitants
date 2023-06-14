@@ -11,7 +11,7 @@
                      android:maxSdkVersion="28" />
     <application
         android:label="visitants"
-        android:name="androidx.multidex.MultiDexApplication"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

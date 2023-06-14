@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
+import 'package:visitants/app/features/home/presentation/pages/list_visitor_page.dart';
+import 'package:visitants/app/features/home/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/app/features/login/presentation/login_module.dart';
-import 'package:visitants/app/features/visitor_registration/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/core/state.dart';
 
 import '../../../../../core/app_state.dart';
@@ -77,7 +78,9 @@ class HomePageState
                   Container(
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.getListVisitor();
+                      },
                       child: Text("Visitantes cadastrados"),
                     ),
                   ),
