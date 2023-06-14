@@ -1,6 +1,6 @@
 import 'package:visitants/app/features/home/presentation/home_quick_actions.dart';
 import 'package:visitants/app/features/home/presentation/pages/home_page.dart';
-import 'package:visitants/app/features/home/presentation/pages/list_visitor_page.dart';
+import 'package:visitants/app/features/home/presentation/pages/list_visitors_page.dart';
 import 'package:visitants/app/features/home/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/module/quick_actions.dart';
 

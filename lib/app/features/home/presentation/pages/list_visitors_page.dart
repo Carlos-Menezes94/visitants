@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
@@ -22,9 +21,6 @@ class ListVisitorPageState
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String formattedDateTime = DateFormat('EEEE, HH:mm', 'pt_BR').format(now);
-
     return Scaffold(
       appBar: AppBar(
         title: Center(

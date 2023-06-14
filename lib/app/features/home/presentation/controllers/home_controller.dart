@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
@@ -12,7 +9,7 @@ import 'package:visitants/core/controller.dart';
 
 import '../../../../../utils/toast.dart';
 import '../../../login/presentation/login_module.dart';
-import '../pages/list_visitor_page.dart';
+import '../pages/list_visitors_page.dart';
 
 class HomeController extends Controller {
   final GetListVisitorUsecase getListVisitorUsecase;
@@ -34,34 +31,7 @@ class HomeController extends Controller {
     }
   }
 
-  // Future<void> getList() async {
-  //   final collectionVisitorsTable =
-  //       FirebaseFirestore.instance.collection('tabela_pessoas');
-  //   final docRef = collectionVisitorsTable.doc('cadastrados');
-  //   store.listVisitor.value = [];
-  //   final documentSnapshot = await docRef.get();
-  //   if (documentSnapshot.exists) {
-  //     final data = documentSnapshot.data();
-  //     final lista = data?['lista'] as List<dynamic>?;
 
-  //     if (lista != null) {
-  //       for (final item in lista) {
-  //         if (item is Map<String, dynamic>) {
-  //           VisitorModel visitor = VisitorModel.fromJson(item);
-  //           store.listVisitor.value.add(visitor);
-  //         }
-  //       }
-  //       LoginModule.to.navigator.pushNamed(ListVisitorPage.routeName);
-  //       print(store.listVisitor.value);
-  //       // Faça o que você precisa com a lista de visitantes
-  //       // ...
-  //     } else {
-  //       print('A lista de visitantes não foi encontrada.');
-  //     }
-  //   } else {
-  //     print('Documento não encontrado.');
-  //   }
-  // }
 
   Future<void> getListVisitor() async {
     final response = await getListVisitorUsecase.getListVisitors();
