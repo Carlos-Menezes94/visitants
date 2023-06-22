@@ -78,7 +78,7 @@ class HomePageState
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
-                        controller.getListVisitor();
+                        controller.getListVisitor(context);
                       },
                       child: Text("Visitantes cadastrados"),
                     ),

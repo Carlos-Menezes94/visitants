@@ -25,7 +25,7 @@ class ListVisitorPageState
       appBar: AppBar(
         title: Center(
           child: Text(
-            "Home",
+            "Visitantes cadastrados",
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -43,6 +43,9 @@ class ListVisitorPageState
       body: ValueListenableBuilder<List<VisitorModel>>(
         valueListenable: controller.store.listVisitor,
         builder: (context, state, child) {
+          if (store.state.value.hasError()) {
+            Center(child: Text("Lista vazia"));
+          }
           return Scaffold(
             body: ListView.builder(
               itemCount: store.listVisitor.value.length,

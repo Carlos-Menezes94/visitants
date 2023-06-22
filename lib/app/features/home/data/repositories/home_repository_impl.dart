@@ -3,6 +3,7 @@ import 'package:visitants/app/features/home/data/data_sources/home_data_source_i
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import '../../../../../core/failure.dart';
 import '../../domain/failures/cant_created_new_visitor_failure.dart';
+import '../../domain/failures/cant_get_list_visitors_failure.dart';
 import '../../domain/repositories/home_repository_abstract.dart';
 
 class HomeRepositoryImpl implements HomeRepositoryAbstract {
@@ -41,7 +42,7 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
       if (list.isNotEmpty) {
         return Right(list);
       } else {
-        return Left(CantCreateNewVisitorFailure());
+        return Left(CantGetListVisitorsFailure());
       }
     } catch (error) {
       return Left(CantCreateNewVisitorFailure());

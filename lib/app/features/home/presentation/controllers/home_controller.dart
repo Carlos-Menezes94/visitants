@@ -5,6 +5,7 @@ import 'package:visitants/app/features/home/domain/usecases/create_new_registrat
 import 'package:visitants/app/features/home/domain/usecases/get_list_visitor_usecase.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/app/features/login/presentation/stores/login_store.dart';
+import 'package:visitants/core/app_state.dart';
 import 'package:visitants/core/controller.dart';
 
 import '../../../../../utils/toast.dart';
@@ -31,13 +32,20 @@ class HomeController extends Controller {
     }
   }
 
+  Future<void> getListVisitor(BuildContext context) async {
+    store.state.value = AppState.loading();
 
-
-  Future<void> getListVisitor() async {
     final response = await getListVisitorUsecase.getListVisitors();
 
     response.fold((failure) {
-      print(failure);
+      store.state.value = AppState.error();
+
+      return ToastHandler().showMyCustomToast(
+        context,
+        backgroundColor: Colors.yellowAccent.shade400,
+        color: Colors.black,
+        text: failure.message,
+      );
     }, (sucess) {
       store.listVisitor.value = sucess;
       print(sucess);
