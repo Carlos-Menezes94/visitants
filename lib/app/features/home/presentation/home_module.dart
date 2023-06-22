@@ -1,5 +1,7 @@
 import 'package:visitants/app/features/home/presentation/home_quick_actions.dart';
 import 'package:visitants/app/features/home/presentation/pages/home_page.dart';
+import 'package:visitants/app/features/home/presentation/pages/list_visitors_page.dart';
+import 'package:visitants/app/features/home/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/module/quick_actions.dart';
 
 import '../../../../module/module.dart';
@@ -19,6 +21,9 @@ class HomeModule extends Module
   @override
   Map<String, RouteBuilder> get routes => {
         HomePage.routeName: (context, arguments) => HomePage(),
+        ListVisitorPage.routeName: (context, arguments) => ListVisitorPage(),
+        VisitorRegistrationPage.routeName: (context, arguments) =>
+            VisitorRegistrationPage()
       };
 
   @override

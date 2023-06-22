@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:visitants/app/features/visitor_registration/presentation/controllers/visitor_registration_controller.dart';
-import 'package:visitants/app/features/visitor_registration/presentation/stores/visitor_registration_store.dart';
-import 'package:visitants/app/features/visitor_registration/presentation/visitor_registration_module.dart';
+import 'package:visitants/app/features/home/presentation/controllers/home_controller.dart';
+import 'package:visitants/app/features/home/presentation/home_module.dart';
+import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/core/state.dart';
 
 class VisitorRegistrationPage extends StatefulWidget {
@@ -16,10 +16,10 @@ class VisitorRegistrationPage extends StatefulWidget {
 }
 
 class VisitorRegistrationPageState extends StatePage<
-    VisitorRegistrationModule,
+    HomeModule,
     VisitorRegistrationPage,
-    VisitorRegistrationController,
-    VisitorRegistrationStore> {
+    HomeController,
+    HomeStore> {
   final _formKey = GlobalKey<FormState>();
 
   void _submitForm() {
@@ -36,7 +36,7 @@ class VisitorRegistrationPageState extends StatePage<
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            controller.clearTextField();
+            // controller.clearTextField();
             Navigator.of(context).pop();
           },
         ),

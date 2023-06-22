@@ -2,12 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
-import 'package:visitants/app/features/visitor_registration/presentation/visitor_registration_module.dart';
-
 import 'package:visitants/module/module_app.dart';
-
 import 'app/features/login/presentation/login_module.dart';
-
 import 'core/firebase_options.dart';
 
 void main() async {
@@ -19,7 +15,6 @@ void main() async {
     mainModule: LoginModule(),
     childModules: [
       HomeModule(),
-      VisitorRegistrationModule(),
     ],
     app: (home) => MyApp(home: home),
   ));

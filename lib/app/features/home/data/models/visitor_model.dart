@@ -1,12 +1,13 @@
-import '../../domain/entities/visitor_entity.dart';
+
+import 'package:visitants/app/features/home/domain/entities/visitor_entity.dart';
 
 class VisitorModel extends VisitorEntity {
   VisitorModel({
-    required super.name,
-    required super.cpf,
-    required super.apVisited,
-    required super.carPlate,
-  });
+    required String name,
+    required String cpf,
+    required String apVisited,
+    required String carPlate,
+  }) : super(name: name, cpf: cpf, apVisited: apVisited, carPlate: carPlate);
 
   factory VisitorModel.fromJson(Map<String, dynamic> json) {
     return VisitorModel(
@@ -15,6 +16,10 @@ class VisitorModel extends VisitorEntity {
       apVisited: json['ap_visitado'],
       carPlate: json['placa_do_carro'],
     );
+  }
+
+  static List<VisitorModel> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => VisitorModel.fromJson(json)).toList();
   }
 
   Map<String, dynamic> toJson() {
