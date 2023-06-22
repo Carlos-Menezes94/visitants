@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:validadores/Validador.dart';
 import 'package:visitants/app/features/home/presentation/controllers/home_controller.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/core/state.dart';
+import 'package:visitants/utils/masks/cpf_mask.dart';
 
 class VisitorRegistrationPage extends StatefulWidget {
   static const String routeName = '/VisitorRegistrationPage';
 
-  // const VisitorRegistrationPage({super.key});
   const VisitorRegistrationPage({Key? key}) : super(key: key);
 
   @override
@@ -15,11 +16,8 @@ class VisitorRegistrationPage extends StatefulWidget {
       VisitorRegistrationPageState();
 }
 
-class VisitorRegistrationPageState extends StatePage<
-    HomeModule,
-    VisitorRegistrationPage,
-    HomeController,
-    HomeStore> {
+class VisitorRegistrationPageState extends StatePage<HomeModule,
+    VisitorRegistrationPage, HomeController, HomeStore> {
   final _formKey = GlobalKey<FormState>();
 
   void _submitForm() {
@@ -52,27 +50,29 @@ class VisitorRegistrationPageState extends StatePage<
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Por favor, insira um nome';
+                    return '[Por favor, insira um nome]';
                   }
                   return null;
                 },
               ),
               TextFormField(
+                inputFormatters: [CPFMask.inputMask],
                 controller: controller.store.cpfController,
                 decoration: InputDecoration(labelText: 'CPF'),
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Por favor, insira um CPF';
-                  }
-                  return null;
+                  return Validador()
+                      .add(Validar.CPF, msg: 'CPF Inválido')
+                      .minLength(11)
+                      .maxLength(11)
+                      .valido(value, clearNoNumber: false);
                 },
               ),
               TextFormField(
                 controller: controller.store.visitLocationController,
-                decoration: InputDecoration(labelText: 'Local a visitar'),
+                decoration: InputDecoration(labelText: 'Local à visitar'),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Por favor, insira um local';
+                    return '[Por favor, insira um local]';
                   }
                   return null;
                 },

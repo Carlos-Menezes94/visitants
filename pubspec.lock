@@ -341,6 +341,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  mask_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: mask_text_input_formatter
+      sha256: "19bb7809c3c2559277e95521b3ee421e1409eb2cc85efd2feb191696c92490f4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   matcher:
     dependency: transitive
     description:
@@ -538,6 +546,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
+  validadores:
+    dependency: "direct main"
+    description:
+      name: validadores
+      sha256: c37489a07e30311f999242a06a36444620848ceeedea904e78c7c567d4cc68fb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   vector_math:
     dependency: transitive
     description:

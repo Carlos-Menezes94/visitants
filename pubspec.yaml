@@ -41,8 +41,10 @@ dependencies:
   fluttertoast: ^8.2.2
   get_it: ^7.6.0
   intl: ^0.18.0
+  mask_text_input_formatter: ^2.4.0
   mockito: ^5.4.2
   url_launcher: ^6.1.11
+  validadores: ^1.0.5
 
 dev_dependencies:
 
