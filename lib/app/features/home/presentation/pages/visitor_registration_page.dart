@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:validadores/Validador.dart';
 import 'package:visitants/app/features/home/presentation/controllers/home_controller.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
@@ -34,7 +33,7 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // controller.clearTextField();
+            controller.clearTextField();
             Navigator.of(context).pop();
           },
         ),
@@ -60,11 +59,7 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
                 controller: controller.store.cpfController,
                 decoration: InputDecoration(labelText: 'CPF'),
                 validator: (value) {
-                  return Validador()
-                      .add(Validar.CPF, msg: 'CPF Inválido')
-                      .minLength(11)
-                      .maxLength(11)
-                      .valido(value, clearNoNumber: false);
+                  return controller.validCpf(value!);
                 },
               ),
               TextFormField(
@@ -81,6 +76,7 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
                 controller: controller.store.carPlateController,
                 decoration: InputDecoration(labelText: 'Placa do carro'),
               ),
+              SizedBox(height: 40),
               ElevatedButton(
                 onPressed: _submitForm,
                 child: Text('Enviar'),

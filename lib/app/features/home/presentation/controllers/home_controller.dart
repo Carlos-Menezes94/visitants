@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:validadores/Validador.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/app/features/home/domain/usecases/create_new_registration_visitor_use_case.dart';
 import 'package:visitants/app/features/home/domain/usecases/get_list_visitor_usecase.dart';
@@ -47,6 +48,7 @@ class HomeController extends Controller {
         text: failure.message,
       );
     }, (sucess) {
+      store.state.value = AppState.success();
       store.listVisitor.value = sucess;
       print(sucess);
       LoginModule.to.navigator.pushNamed(ListVisitorPage.routeName);
@@ -90,6 +92,15 @@ class HomeController extends Controller {
     launch(uri.toString());
   }
 
+  String? validCpf(String value) {
+    String textInput = value.toString().replaceAll('.', '').replaceAll('-', '');
+    return Validador()
+        .add(Validar.CPF, msg: 'CPF Inválido')
+        .minLength(11)
+        .maxLength(11)
+        .valido(textInput, clearNoNumber: false);
+  }
+
   void showWhatsApp() async {
     String message = 'Olá, aqui é da portaria.';
 
@@ -100,5 +111,12 @@ class HomeController extends Controller {
     } else {
       throw 'Não foi possível abrir o WhatsApp.';
     }
+  }
+
+  void clearTextField() {
+    store.nameController.clear();
+    store.cpfController.clear();
+    store.visitLocationController.clear();
+    store.carPlateController.clear();
   }
 }
