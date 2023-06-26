@@ -1,21 +1,23 @@
 import 'package:dartz/dartz.dart';
-import 'package:visitants/app/features/home/data/data_sources/home_data_source_impl.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import '../../../../../core/failure.dart';
 import '../../domain/failures/cant_created_new_visitor_failure.dart';
 import '../../domain/failures/cant_get_list_visitors_failure.dart';
 import '../../domain/failures/list_is_empty_failure.dart';
 import '../../domain/repositories/home_repository_abstract.dart';
+import '../data_sources/local/home_local_data_source_impl.dart';
+import '../data_sources/remote/home_remote_data_source_impl.dart';
 
 class HomeRepositoryImpl implements HomeRepositoryAbstract {
   final HomeDataSourceImpl dataSource;
+  final HomeLocalDataSourceImpl dataSourceLocal;
 
-  HomeRepositoryImpl({required this.dataSource});
+  HomeRepositoryImpl({required this.dataSource, required this.dataSourceLocal});
   @override
   Future<Either<Failure, String>> createdNewVisitor(
       {required VisitorModel visitor}) async {
     try {
-      final response = await dataSource.registerNewVisitor(visitor);
+      final response = await dataSourceLocal.registerNewVisitorHive(visitor);
       if (response.success) {
         return Right(response.data.toString());
       } else {

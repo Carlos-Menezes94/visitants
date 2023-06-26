@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/core/response.dart';
 
-import 'home_data_source_abstract.dart';
+import 'home_remote_data_source_abstract.dart';
 
-class HomeDataSourceImpl implements HomeDataSourceAbstract {
+class HomeDataSourceImpl implements HomeRemoteDataSourceAbstract {
   @override
   Future<DataSourceResponse> registerNewVisitor(
       VisitorModel visitorData) async {
