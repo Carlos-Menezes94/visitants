@@ -34,7 +34,7 @@ class HomeInjector extends ModuleInjector<HomeModule> {
 
   @override
   void datasources() {
-    registerFactory(() => HomeDataSourceImpl());
+    registerFactory(() => HomeRemoteDataSourceImpl());
     registerFactory(() => HomeLocalDataSourceImpl(
         localStorage: HomeModule.to.injector.get<LocalStorageService>()));
   }
@@ -42,7 +42,7 @@ class HomeInjector extends ModuleInjector<HomeModule> {
   @override
   void repositories() {
     registerFactory(() => HomeRepositoryImpl(
-        dataSource: HomeModule.to.injector.get<HomeDataSourceImpl>(),
+        dataSourceRemote: HomeModule.to.injector.get<HomeRemoteDataSourceImpl>(),
         dataSourceLocal:
             HomeModule.to.injector.get<HomeLocalDataSourceImpl>()));
   }

@@ -4,9 +4,9 @@ import 'package:visitants/core/response.dart';
 
 import 'home_remote_data_source_abstract.dart';
 
-class HomeDataSourceImpl implements HomeRemoteDataSourceAbstract {
+class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
   @override
-  Future<DataSourceResponse> registerNewVisitor(
+  Future<DataSourceResponse> registerNewVisitorFirestore(
       VisitorModel visitorData) async {
     final CollectionReference collectionVisitorsTable =
         FirebaseFirestore.instance.collection('tabela_pessoas');
