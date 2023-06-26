@@ -61,6 +61,8 @@ class HomeController extends Controller {
       cpf: store.cpfController.text,
       apVisited: store.visitLocationController.text,
       carPlate: store.carPlateController.text,
+      dateTimeLastUpdate: '',
+      dateTimeRegister: '',
     );
 
     final response = await createNewRegistrationVisitorUseCase.registerVisitor(

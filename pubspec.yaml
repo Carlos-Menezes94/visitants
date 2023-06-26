@@ -49,6 +49,7 @@ dependencies:
   mask_text_input_formatter: ^2.4.0
   mockito: ^5.4.2
   url_launcher: ^6.1.11
+  validadores: ^1.0.5
 
 dev_dependencies:
 

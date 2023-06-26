@@ -15,7 +15,13 @@ class HomeStore extends Store {
   // int expandedItemIndex = -1;
 
   ValueNotifier<VisitorModel> visitorData = ValueNotifier<VisitorModel>(
-      VisitorModel(name: "", cpf: "", apVisited: "", carPlate: ""));
+      VisitorModel(
+          name: "",
+          cpf: "",
+          apVisited: "",
+          carPlate: "",
+          dateTimeLastUpdate: '',
+          dateTimeRegister: ''));
   TextEditingController nameController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
   TextEditingController visitLocationController = TextEditingController();
