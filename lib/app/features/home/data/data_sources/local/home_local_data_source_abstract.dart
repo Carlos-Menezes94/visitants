@@ -3,5 +3,5 @@ import 'package:visitants/core/response.dart';
 
 abstract class HomeLocalDataSourceAbstract {
   Future registerNewVisitorHive(VisitorModel visitor);
-  Future<DataSourceResponse> getListVisitors();
+  Future<DataSourceResponse> getListVisitorsLocal();
 }

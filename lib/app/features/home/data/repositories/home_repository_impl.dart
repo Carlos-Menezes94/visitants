@@ -14,7 +14,8 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
   final HomeRemoteDataSourceImpl dataSourceRemote;
   final HomeLocalDataSourceImpl dataSourceLocal;
 
-  HomeRepositoryImpl({required this.dataSourceRemote, required this.dataSourceLocal});
+  HomeRepositoryImpl(
+      {required this.dataSourceRemote, required this.dataSourceLocal});
   @override
   Future<Either<Failure, String>> createdNewVisitor(
       {required VisitorModel visitor}) async {
@@ -39,22 +40,37 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
 
   @override
   Future<Either<Failure, List<VisitorModel>>> getListVisitors() async {
-    try {
-      List<VisitorModel> list = [];
-      final response = await dataSourceRemote.getListVisitors();
-      final data = response.data;
-      final lista = data?['lista'] as List<dynamic>?;
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    final DataSourceResponse response;
 
-      for (var item in lista!) {
-        if (item is Map<String, dynamic>) {
-          VisitorModel visitor = VisitorModel.fromJson(item);
-          list.add(visitor);
+    try {
+      if (connectivityResult == ConnectivityResult.none) {
+        response = await dataSourceLocal.getListVisitorsLocal();
+        final List<VisitorModel> visitors = response.data.cast<VisitorModel>();
+
+        if (visitors.isNotEmpty) {
+          return Right(visitors);
+        } else {
+          return Left(ListIsEmptyFailure());
         }
-      }
-      if (list.isNotEmpty) {
-        return Right(list);
       } else {
-        return Left(ListIsEmptyFailure());
+        response = await dataSourceRemote.getListVisitors();
+        List<VisitorModel> list = [];
+        final data = response.data;
+        final lista = data?['lista'] as List<dynamic>?;
+
+        for (var item in lista!) {
+          if (item is Map<String, dynamic>) {
+            VisitorModel visitor = VisitorModel.fromJson(item);
+            list.add(visitor);
+          }
+        }
+
+        if (list.isNotEmpty) {
+          return Right(list);
+        } else {
+          return Left(ListIsEmptyFailure());
+        }
       }
     } catch (error) {
       return Left(CantGetListVisitorsFailure());

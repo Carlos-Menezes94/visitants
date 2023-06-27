@@ -5,7 +5,7 @@ part 'visitor_model.g.dart';
 
 @HiveType(typeId: 1)
 class VisitorModel extends HiveObject {
-  static const hiveBoxKey = "login_data";
+  static const hiveBoxKey = "model_visitors";
 
   @HiveField(0)
   late String name;
@@ -40,8 +40,8 @@ class VisitorModel extends HiveObject {
       cpf: json['cpf'],
       apVisited: json['ap_visitado'],
       carPlate: json['placa_do_carro'],
-      dateTimeLastUpdate: json['data_atualizacao'],
-      dateTimeRegister: json['data_registro'],
+      dateTimeLastUpdate: json['data_atualizacao'] ?? "",
+      dateTimeRegister: json['data_registro'] ?? "",
     );
   }
 

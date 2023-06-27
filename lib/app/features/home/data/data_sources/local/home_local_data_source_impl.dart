@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/core/local_storage/local_storage_services.dart';
 import 'package:visitants/core/response.dart';
@@ -6,29 +5,37 @@ import 'package:visitants/core/response.dart';
 import 'home_local_data_source_abstract.dart';
 
 class HomeLocalDataSourceImpl implements HomeLocalDataSourceAbstract {
-   final LocalStorageService localStorage;
+  final LocalStorageService localStorage;
 
   HomeLocalDataSourceImpl({required this.localStorage});
 
   @override
   Future<DataSourceResponse> registerNewVisitorHive(
       VisitorModel visitorData) async {
-    final box = await localStorage.insertData(
-        directory: 'model_visitors', key: 'visitors', data: visitorData);
+    final response =
+        await localStorage.recoverDirectory(directory: VisitorModel.hiveBoxKey);
+    int idKey = response.length + 1;
 
-        return DataSourceResponse(success: true, data: box);
+    final box = await localStorage.insertData(
+        directory: VisitorModel.hiveBoxKey,
+        key: idKey.toString(),
+        data: visitorData);
+
+    return DataSourceResponse(success: true, data: box);
   }
 
   @override
-  Future<DataSourceResponse> getListVisitors() async {
-    final collectionVisitorsTable =
-        FirebaseFirestore.instance.collection('tabela_pessoas');
-    final docRef = collectionVisitorsTable.doc('cadastrados');
+  Future<DataSourceResponse<List>> getListVisitorsLocal() async {
+    // final collectionVisitorsTable =
+    //     FirebaseFirestore.instance.collection('tabela_pessoas');
+    // final docRef = collectionVisitorsTable.doc('cadastrados');
 
-    final response = await docRef.get();
+    // final response = await docRef.get();
 
-    if (response.exists) {
-      return DataSourceResponse(success: true, data: response);
+    final response =
+        await localStorage.recoverDirectory(directory: 'model_visitors');
+    if (response.isNotEmpty) {
+      return DataSourceResponse<List>(success: true, data: response);
     } else {
       return DataSourceResponse(success: false, data: response);
     }
