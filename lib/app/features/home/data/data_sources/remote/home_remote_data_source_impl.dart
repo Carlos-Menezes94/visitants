@@ -22,23 +22,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
         FirebaseFirestore.instance.collection('tabela_pessoas');
     DocumentReference docRef = collectionVisitorsTable.doc("cadastrados");
 
-    // final documentSnapshot = await docRef.get();
-
-    // if (documentSnapshot.exists) {
-    //   List<dynamic> listVisitors = documentSnapshot.get('lista');
-
-    //   for (var visitor in listVisitors) {
-    //     if (visitor['cpf'] == visitorData.cpf) {
-    //       return DataSourceResponse(
-    //           success: false, data: "Visitante já existe na coleção");
-    //     }
-    //   }
-    // }
-
     try {
       await docRef.update({
-        'lista': FieldValue.arrayUnion([visitorData.toJson()]),
-        'lastFirestoreUpdate': DateTime.now()
+        'listVisitors': FieldValue.arrayUnion([visitorData.toJson()]),
+        'lastFirestoreUpdate': DateTime.now().toString()
       });
 
       return DataSourceResponse(success: true, data: "Sucesso");
@@ -63,11 +50,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
 
     final response = await docRef.get();
 
-    if (!(responseHiveDateTimeLastUpdate == null ||
+    if (responseHiveDateTimeLastUpdate == null ||
         DateTime.parse(response['lastFirestoreUpdate'])
                 .difference(DateTime.parse(responseHiveDateTimeLastUpdate))
                 .inMinutes >
-            5)) {
+            5) {
       // Atualizar o Hive com os dados do Firestore
       List<Map<String, dynamic>> listOfMaps =
           response['lista'].cast<Map<String, dynamic>>();
