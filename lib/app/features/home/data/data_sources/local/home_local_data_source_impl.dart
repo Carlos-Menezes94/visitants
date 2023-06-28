@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/core/local_storage/local_storage_services.dart';
 import 'package:visitants/core/response.dart';
@@ -15,11 +16,16 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSourceAbstract {
     final response =
         await localStorage.recoverDirectory(directory: VisitorModel.hiveBoxKey);
     int idKey = response.length + 1;
+    final boxDateTimeLastUpdate =
+        await Hive.openBox('box_date_time_last_update');
+
+    await boxDateTimeLastUpdate.put('lastDateTimeUpdate', DateTime.now());
 
     final box = await localStorage.insertData(
-        directory: VisitorModel.hiveBoxKey,
-        key: idKey.toString(),
-        data: visitorData);
+      directory: VisitorModel.hiveBoxKey,
+      key: idKey.toString(),
+      data: visitorData,
+    );
 
     return DataSourceResponse(success: true, data: box);
   }

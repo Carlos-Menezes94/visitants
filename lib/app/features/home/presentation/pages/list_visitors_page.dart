@@ -23,7 +23,7 @@ class ListVisitorPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             "Visitantes cadastrados",
             style: TextStyle(color: Colors.white),
@@ -33,7 +33,7 @@ class ListVisitorPageState
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -44,7 +44,7 @@ class ListVisitorPageState
         valueListenable: controller.store.listVisitor,
         builder: (context, state, child) {
           if (store.state.value.hasError()) {
-            Center(child: Text("Lista vazia"));
+            const Center(child: Text("Lista vazia"));
           }
           return Scaffold(
             body: ListView.builder(
@@ -68,8 +68,8 @@ class ListVisitorPageState
                               (BuildContext context, bool isExpanded) {
                             return ListTile(
                               title: Text(
-                                visitor.name,
-                                style: TextStyle(fontWeight: FontWeight.w500),
+                                visitor.name!,
+                                style: const TextStyle(fontWeight: FontWeight.w500),
                               ),
                             );
                           },

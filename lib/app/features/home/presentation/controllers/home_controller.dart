@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:validadores/Validador.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/app/features/home/domain/usecases/create_new_registration_visitor_use_case.dart';
 import 'package:visitants/app/features/home/domain/usecases/get_list_visitor_usecase.dart';
@@ -50,7 +49,6 @@ class HomeController extends Controller {
     }, (sucess) {
       store.state.value = AppState.success();
       store.listVisitor.value = sucess;
-      print(sucess);
       LoginModule.to.navigator.pushNamed(ListVisitorPage.routeName);
     });
   }
@@ -61,7 +59,6 @@ class HomeController extends Controller {
       cpf: store.cpfController.text,
       apVisited: store.visitLocationController.text,
       carPlate: store.carPlateController.text,
-      dateTimeLastUpdate: '',
       dateTimeRegister: '',
     );
 
@@ -96,11 +93,12 @@ class HomeController extends Controller {
 
   String? validCpf(String value) {
     String textInput = value.toString().replaceAll('.', '').replaceAll('-', '');
-    return Validador()
-        .add(Validar.CPF, msg: 'CPF Inválido')
-        .minLength(11)
-        .maxLength(11)
-        .valido(textInput, clearNoNumber: false);
+    return null;
+    // return Validador()
+    //     .add(Validar.CPF, msg: 'CPF Inválido')
+    //     .minLength(11)
+    //     .maxLength(11)
+    //     .valido(textInput, clearNoNumber: false);
   }
 
   void showWhatsApp() async {

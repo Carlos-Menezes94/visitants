@@ -12,16 +12,15 @@ class HomeStore extends Store {
   bool isContactResidentWhatsApp = false;
 
   bool isExpanded = false;
-  // int expandedItemIndex = -1;
 
-  ValueNotifier<VisitorModel> visitorData = ValueNotifier<VisitorModel>(
-      VisitorModel(
-          name: "",
-          cpf: "",
-          apVisited: "",
-          carPlate: "",
-          dateTimeLastUpdate: '',
-          dateTimeRegister: ''));
+  ValueNotifier<VisitorModel> visitorData =
+      ValueNotifier<VisitorModel>(VisitorModel(
+    name: "",
+    cpf: "",
+    apVisited: "",
+    carPlate: "",
+    dateTimeRegister: '',
+  ));
   TextEditingController nameController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
   TextEditingController visitLocationController = TextEditingController();
