@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-
-import '../controllers/login_controller.dart';
 
 class InputDataLoginWidget extends StatefulWidget {
   final String labelText;

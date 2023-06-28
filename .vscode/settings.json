@@ -1,0 +1,8 @@
+{
+    "[dart]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true
+        }
+    },
+    "java.configuration.updateBuildConfiguration": "interactive",
+}

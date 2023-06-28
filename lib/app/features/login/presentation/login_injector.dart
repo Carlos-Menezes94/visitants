@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:visitants/app/features/login/data/data_sources/login_data_source_impl.dart';
 import 'package:visitants/app/features/login/data/repositories/login_repository_impl.dart';
 import 'package:visitants/app/features/login/presentation/stores/login_store.dart';
-
-import '../../../../core/firebase_instances.dart';
 import '../../../../module/module_injector.dart';
 import '../domain/usecases/signin_login_use_case.dart';
 import 'controllers/login_controller.dart';

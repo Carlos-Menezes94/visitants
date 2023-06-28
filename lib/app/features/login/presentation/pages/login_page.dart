@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:visitants/app/features/login/presentation/login_module.dart';
 import 'package:visitants/app/features/login/presentation/stores/login_store.dart';
 import 'package:visitants/core/state.dart';
