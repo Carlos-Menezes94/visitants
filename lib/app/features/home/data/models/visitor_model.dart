@@ -1,20 +1,43 @@
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:visitants/app/features/home/domain/entities/visitor_entity.dart';
+part 'visitor_model.g.dart';
 
-class VisitorModel extends VisitorEntity {
+@HiveType(typeId: 1)
+class VisitorModel extends HiveObject {
+  static const hiveBoxKey = "model_visitors";
+
+  @HiveField(0)
+  late String? name;
+
+  @HiveField(1)
+  late String? cpf;
+
+  @HiveField(2)
+  late String? apVisited;
+
+  @HiveField(3)
+  late String? carPlate;
+
+
+  @HiveField(5)
+  late String? dateTimeRegister;
+
   VisitorModel({
-    required String name,
-    required String cpf,
-    required String apVisited,
-    required String carPlate,
-  }) : super(name: name, cpf: cpf, apVisited: apVisited, carPlate: carPlate);
+    required this.name,
+    required this.cpf,
+    required this.apVisited,
+    required this.carPlate,
+    required this.dateTimeRegister,
+  });
 
   factory VisitorModel.fromJson(Map<String, dynamic> json) {
     return VisitorModel(
-      name: json['nome'],
-      cpf: json['cpf'],
+      name: json['nome'] ?? "",
+      cpf: json['cpf'] ?? "",
       apVisited: json['ap_visitado'],
-      carPlate: json['placa_do_carro'],
+      carPlate: json['placa_do_carro'] ?? "",
+      dateTimeRegister: json['data_registro'] ?? "",
     );
   }
 
@@ -28,6 +51,7 @@ class VisitorModel extends VisitorEntity {
       'cpf': cpf,
       'ap_visitado': apVisited,
       'placa_do_carro': carPlate,
+      'data_registro': dateTimeRegister,
     };
   }
 }
