@@ -22,9 +22,22 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
         FirebaseFirestore.instance.collection('tabela_pessoas');
     DocumentReference docRef = collectionVisitorsTable.doc("cadastrados");
 
+    // final documentSnapshot = await docRef.get();
+
+    // if (documentSnapshot.exists) {
+    //   List<dynamic> listVisitors = documentSnapshot.get('lista');
+
+    //   for (var visitor in listVisitors) {
+    //     if (visitor['cpf'] == visitorData.cpf) {
+    //       return DataSourceResponse(
+    //           success: false, data: "Visitante já existe na coleção");
+    //     }
+    //   }
+    // }
+
     try {
       await docRef.update({
-        'listVisitors': FieldValue.arrayUnion([visitorData.toJson()]),
+        'lista': FieldValue.arrayUnion([visitorData.toJson()]),
         'lastFirestoreUpdate': DateTime.now().toString()
       });
 

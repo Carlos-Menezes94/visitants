@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 part 'visitor_model.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class VisitorModel extends HiveObject {
   static const hiveBoxKey = "model_visitors";
 
