@@ -15,26 +15,26 @@ class LoginQuickActions extends QuickActions<LoginModule> {
 
     store.state.value = AppState.loading();
 
-    final FirebaseAuth _authServiceauth = FirebaseAuth.instance;
+    final FirebaseAuth authServiceauth = FirebaseAuth.instance;
 
-    await _authServiceauth.signOut();
+    await authServiceauth.signOut();
     store.didCheckAuth = false;
     checkAuth();
   }
 
   Future<void> checkAuth() async {
     final store = injector.get<LoginStore>();
-    User? user;
     store.state.value = AppState.loading();
 
-
-    store.firebaseAuth.value.authStateChanges().listen((User? userInital) {
-      user = ((userInital == null) ? null : userInital);
-    });
-
+    store.firebaseAuth.value.authStateChanges().listen((User? userInital) {});
+    if (store.isSplashScreenView.value) {
+      store.state.value = AppState.idle();
+      await Future.delayed(const Duration(seconds: 4));
+      store.isSplashScreenView.value = false;
+    }
     if (store.firebaseAuth.value.currentUser == null) {
       LoginModule.to.navigator.pushNamed(LoginPage.routeName);
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
         store.state.value = AppState.error();
       });
 
@@ -42,7 +42,7 @@ class LoginQuickActions extends QuickActions<LoginModule> {
     } else {
       LoginModule.to.navigator.pushNamed(HomePage.routeName);
 
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
         store.state.value = AppState.success();
       });
     }
@@ -58,7 +58,7 @@ class LoginQuickActions extends QuickActions<LoginModule> {
         password: store.passwordText, email: store.emailText);
 
     response.fold((failure) {
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
         store.state.value = AppState.error();
       });
       ScaffoldMessenger.of(store.context!)

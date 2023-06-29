@@ -9,7 +9,9 @@ class LoginStore extends Store {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String emailText = "rafael@gmail.com";
-  String passwordText = "Smile@21";
+  String passwordText = "teste@21";
+  ValueNotifier<bool> isSplashScreenView = ValueNotifier<bool>(true);
+
   BuildContext? context;
   FocusNode focusNodeEmail = FocusNode();
   FocusNode focusNodePassword = FocusNode();
