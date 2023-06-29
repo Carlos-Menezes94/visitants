@@ -29,16 +29,17 @@ class ListVisitorPageState
             style: TextStyle(color: Colors.white),
           ),
         ),
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        ],
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: ValueListenableBuilder<List<VisitorModel>>(
         valueListenable: controller.store.listVisitor,
@@ -69,7 +70,8 @@ class ListVisitorPageState
                             return ListTile(
                               title: Text(
                                 visitor.name!,
-                                style: const TextStyle(fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500),
                               ),
                             );
                           },
@@ -78,8 +80,7 @@ class ListVisitorPageState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('CPF: ${visitor.cpf}'),
-                                Text(
-                                    'Apartamento visitado: ${visitor.apVisited}'),
+                                Text('Apt visitado: ${visitor.apVisited}'),
                                 Text('Placa do carro: ${visitor.carPlate}'),
                               ],
                             ),

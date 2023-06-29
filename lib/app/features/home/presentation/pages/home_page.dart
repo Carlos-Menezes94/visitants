@@ -6,7 +6,6 @@ import 'package:visitants/app/features/home/presentation/stores/home_store.dart'
 import 'package:visitants/app/features/login/presentation/login_module.dart';
 import 'package:visitants/core/state.dart';
 
-import '../../../../../core/app_state.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +26,7 @@ class HomePageState
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
             child: Text(
           "Home",
           style: TextStyle(color: Colors.white),
@@ -36,18 +35,21 @@ class HomePageState
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
             onPressed: () {
               LoginModule.to.actions.logout();
             },
           )
         ],
       ),
-      body: ValueListenableBuilder<AppState>(
+      body: ValueListenableBuilder(
           valueListenable: controller.store.state,
           builder: (context, state, child) {
             if (state.isLoading()) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             return Padding(
               padding: const EdgeInsets.all(18.0),
@@ -58,33 +60,37 @@ class HomePageState
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                          "Olá, ${controller.loginStore.firebaseAuth.value.currentUser!.email}"),
-                      Text(formattedDateTime),
+                        "Olá, ${controller.loginStore.firebaseAuth.value.currentUser!.email}",
+                      ),
+                      Text(
+                        formattedDateTime,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 100),
-                  Container(
+                  const SizedBox(height: 100),
+                  SizedBox(
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
                         LoginModule.to.navigator
                             .pushNamed(VisitorRegistrationPage.routeName);
                       },
-                      child: Text("Cadastrar visitante"),
+                      child: const Text("Cadastrar visitante"),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
                         controller.getListVisitor(context);
                       },
-                      child: Text("Visitantes cadastrados"),
+                      child: const Text("Visitantes cadastrados"),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
@@ -120,10 +126,10 @@ class HomePageState
                               );
                             }));
                       },
-                      child: Text("Ligar para morador"),
+                      child: const Text("Ligar para morador"),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                 ],
