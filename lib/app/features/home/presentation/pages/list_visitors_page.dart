@@ -4,6 +4,7 @@ import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
 import 'package:visitants/core/state.dart';
 
+import '../../../../../core/date_format_util.dart';
 import '../controllers/home_controller.dart';
 
 class ListVisitorPage extends StatefulWidget {
@@ -71,17 +72,47 @@ class ListVisitorPageState
                               title: Text(
                                 visitor.name!,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w500),
+                                    fontWeight: FontWeight.w600, fontSize: 18),
                               ),
+                              subtitle: Text(DateFormatUtil.dateTimeFormatted(
+                                  visitor.dateTimeRegister!)),
                             );
                           },
                           body: ListTile(
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('CPF: ${visitor.cpf}'),
-                                Text('Apt visitado: ${visitor.apVisited}'),
-                                Text('Placa do carro: ${visitor.carPlate}'),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'CPF: ',
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: '${visitor.cpf} \n\n',
+                                      ),
+                                      const TextSpan(text: 'Apt visitado:  '),
+                                      TextSpan(
+                                        text: '${visitor.apVisited} \n\n',
+                                      ),
+                                      const TextSpan(
+                                        text: 'Placa: ',
+                                      ),
+                                      TextSpan(
+                                        text: '${visitor.carPlate} \n\n',
+                                      ),
+                                      const TextSpan(
+                                        text: 'Horario do registro: ',
+                                      ),
+                                      TextSpan(
+                                          text: DateFormatUtil
+                                              .dateTimeFormatted(DateTime.parse(
+                                                      visitor.dateTimeRegister!)
+                                                  .toString())),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
