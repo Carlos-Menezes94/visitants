@@ -52,10 +52,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
 
   @override
   Future<DataSourceResponse> getListVisitors() async {
-    final boxDateTimeLastUpdate =
-        await Hive.openBox('box_date_time_last_update');
-    final responseHiveDateTimeLastUpdate =
-        await boxDateTimeLastUpdate.get('lastDateTimeUpdate');
+    // final boxDateTimeLastUpdate =
+    //     await Hive.openBox('box_date_time_last_update');
+    // final responseHiveDateTimeLastUpdate =
+    //     await boxDateTimeLastUpdate.get('lastDateTimeUpdate');
 
     final collectionVisitorsTable =
         FirebaseFirestore.instance.collection('tabela_pessoas');
@@ -63,30 +63,44 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
 
     final response = await docRef.get();
 
-    if (responseHiveDateTimeLastUpdate == null ||
-        DateTime.parse(response['lastFirestoreUpdate'])
-                .difference(DateTime.parse(responseHiveDateTimeLastUpdate))
-                .inMinutes >
-            5) {
-      // Atualizar o Hive com os dados do Firestore
-      List<Map<String, dynamic>> listOfMaps =
-          response['lista'].cast<Map<String, dynamic>>();
+    List<Map<String, dynamic>> listOfMaps =
+        response['lista'].cast<Map<String, dynamic>>();
 
-      final box = await Hive.openBox(VisitorModel.hiveBoxKey);
+    final box = await Hive.openBox(VisitorModel.hiveBoxKey);
 
-      const uuid = Uuid();
-      //Limpa o box que contém os dados dos visitantes cadastrados
-      await box.clear();
-      for (var map in listOfMaps) {
-        VisitorModel visitor = VisitorModel.fromJson(map);
-        String uniqueKey = uuid.v4(); // Gerar um UUID como chave única
-        await box.put(uniqueKey, visitor);
-      }
-
-      // Atualizar o valor do lastDateTimeUpdate no Hive
-      await boxDateTimeLastUpdate.put(
-          'lastDateTimeUpdate', response['lastFirestoreUpdate']);
+    const uuid = Uuid();
+    //Limpa o box que contém os dados dos visitantes cadastrados
+    await box.clear();
+    for (var map in listOfMaps) {
+      VisitorModel visitor = VisitorModel.fromJson(map);
+      String uniqueKey = uuid.v4(); // Gerar um UUID como chave única
+      await box.put(uniqueKey, visitor);
     }
+
+    // if (responseHiveDateTimeLastUpdate == null ||
+    //     DateTime.parse(response['lastFirestoreUpdate'])
+    //             .difference(responseHiveDateTimeLastUpdate)
+    //             .inMinutes >
+    //         5) {
+    //   // Atualizar o Hive com os dados do Firestore
+    //   List<Map<String, dynamic>> listOfMaps =
+    //       response['lista'].cast<Map<String, dynamic>>();
+
+    //   final box = await Hive.openBox(VisitorModel.hiveBoxKey);
+
+    //   const uuid = Uuid();
+    //   //Limpa o box que contém os dados dos visitantes cadastrados
+    //   await box.clear();
+    //   for (var map in listOfMaps) {
+    //     VisitorModel visitor = VisitorModel.fromJson(map);
+    //     String uniqueKey = uuid.v4(); // Gerar um UUID como chave única
+    //     await box.put(uniqueKey, visitor);
+    //   }
+
+    //   // Atualizar o valor do lastDateTimeUpdate no Hive
+    //   await boxDateTimeLastUpdate.put(
+    //       'lastDateTimeUpdate', response['lastFirestoreUpdate']);
+    // }
 
     if (response.exists) {
       return DataSourceResponse(success: true, data: response);
