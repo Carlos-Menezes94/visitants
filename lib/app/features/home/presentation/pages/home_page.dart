@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/app/features/home/presentation/pages/visitor_registration_page.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
@@ -21,9 +20,6 @@ class HomePageState
     extends StatePage<HomeModule, HomePage, HomeController, HomeStore> {
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String formattedDateTime = DateFormat('EEEE, HH:mm', 'pt_BR').format(now);
-
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -59,11 +55,11 @@ class HomePageState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Olá, ${controller.loginStore.firebaseAuth.value.currentUser!.email}",
+                      const Text(
+                        "Olá, seja bem-vindo!",
                       ),
                       Text(
-                        formattedDateTime,
+                        "${controller.loginStore.firebaseAuth.value.currentUser!.email}",
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -76,7 +72,10 @@ class HomePageState
                         LoginModule.to.navigator
                             .pushNamed(VisitorRegistrationPage.routeName);
                       },
-                      child: const Text("Cadastrar visitante"),
+                      child: const Text(
+                        "Cadastrar visitante",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -86,7 +85,10 @@ class HomePageState
                       onPressed: () {
                         controller.getListVisitor(context);
                       },
-                      child: const Text("Visitantes cadastrados"),
+                      child: const Text(
+                        "Visitantes cadastrados",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -126,7 +128,10 @@ class HomePageState
                               );
                             }));
                       },
-                      child: const Text("Ligar para morador"),
+                      child: const Text(
+                        "Ligar para morador",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
                   const SizedBox(

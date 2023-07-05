@@ -6,6 +6,7 @@ import 'package:visitants/app/features/login/presentation/stores/login_store.dar
 
 import '../../../../core/app_state.dart';
 import '../../../../module/quick_actions.dart';
+import '../../../../utils/toast.dart';
 import '../../home/presentation/pages/home_page.dart';
 import '../domain/usecases/signin_login_use_case.dart';
 
@@ -42,13 +43,13 @@ class LoginQuickActions extends QuickActions<LoginModule> {
     } else {
       LoginModule.to.navigator.pushNamed(HomePage.routeName);
 
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 2), () {
         store.state.value = AppState.success();
       });
     }
   }
 
-  Future<void> signinLoginUserFirebase() async {
+  Future<void> signinLoginUserFirebase(BuildContext context) async {
     final SignInLoginUseCase signInLoginUseCase =
         injector.get<SignInLoginUseCase>();
     final store = injector.get<LoginStore>();
@@ -58,16 +59,27 @@ class LoginQuickActions extends QuickActions<LoginModule> {
         password: store.passwordText, email: store.emailText);
 
     response.fold((failure) {
-      Future.delayed(const Duration(seconds: 3), () {
-        store.state.value = AppState.error();
-      });
-      ScaffoldMessenger.of(store.context!)
-          .showSnackBar(SnackBar(content: Text(failure.message)));
-      return;
+      store.state.value = AppState.error();
+
+      return ToastHandler().showMyCustomToast(
+        context,
+        backgroundColor: Colors.yellowAccent.shade400,
+        color: Colors.black,
+        text: failure.message,
+      );
     }, (sucess) {
       store.didCheckAuth = false;
-
+      disposeLogin();
       return checkAuth();
     });
+  }
+
+  void disposeLogin() {
+    final store = injector.get<LoginStore>();
+
+    store.emailController.clear();
+    store.passwordController.clear();
+    store.passwordText = "";
+    store.passwordText = "";
   }
 }

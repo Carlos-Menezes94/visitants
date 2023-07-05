@@ -8,8 +8,8 @@ class LoginStore extends Store {
   ValueNotifier<User>? dataUserFirebase;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String emailText = "rafael@gmail.com";
-  String passwordText = "teste@21";
+  String emailText = "";
+  String passwordText = "";
   ValueNotifier<bool> isSplashScreenView = ValueNotifier<bool>(true);
 
   BuildContext? context;

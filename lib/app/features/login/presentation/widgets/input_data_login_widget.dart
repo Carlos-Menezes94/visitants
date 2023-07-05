@@ -6,11 +6,13 @@ class InputDataLoginWidget extends StatefulWidget {
   final bool obscureText;
   final TextEditingController controller;
   final TextInputType? textInputType;
+  final Widget? suffixIcon;
 
   final void Function(String) textTextField;
   const InputDataLoginWidget({
     Key? key,
     required this.labelText,
+    required this.suffixIcon,
     required this.controller,
     required this.focusNode,
     required this.textTextField,
@@ -32,9 +34,9 @@ class _InputDataLoginWidgetState extends State<InputDataLoginWidget> {
       onChanged: widget.textTextField,
       keyboardType: widget.textInputType,
       decoration: InputDecoration(
-        labelText: widget.labelText,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-      ),
+          labelText: widget.labelText,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+          suffixIcon: widget.suffixIcon),
       validator: (value) {
         if (value!.isEmpty) {
           return 'Please enter your ${widget.labelText}';

@@ -33,9 +33,15 @@ class LoginPageState
     super.initState();
   }
 
+  bool showPassword = false;
+  void _togglevisibility() {
+    setState(() {
+      showPassword = !showPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    print('rebuild');
     return GestureDetector(
       onTap: controller.closeKeyboardOnOutsideClick,
       child: Scaffold(
@@ -48,7 +54,7 @@ class LoginPageState
                     child: Lottie.asset(
                       AssetLoader.buildingLottie,
                       fit: BoxFit
-                          .cover, // Define como a imagem deve ser ajustada ao espaço disponível
+                          .cover,
                     ),
                   ),
                 );
@@ -59,55 +65,86 @@ class LoginPageState
                   color: Colors.black,
                 ));
               }
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: formKey,
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      InputDataLoginWidget(
-                        labelText: "E-mail",
-                        controller: controller.store.emailController,
-                        focusNode: controller.store.focusNodeEmail,
-                        textTextField: (value) {
-                          controller.store.emailText = value;
-                        },
-                        textInputType: TextInputType.emailAddress,
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 20),
-                      InputDataLoginWidget(
-                        labelText: "Senha",
-                        controller: controller.store.passwordController,
-                        focusNode: controller.store.focusNodePassword,
-                        textTextField: (value) {
-                          controller.store.passwordText = value;
-                        },
-                        textInputType: null,
-                        obscureText: true,
-                      ),
-                      const SizedBox(height: 60),
+                      const SizedBox(height: 70),
                       SizedBox(
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.black),
-                          ),
-                          onPressed: () {
-                            LoginModule.to.actions.signinLoginUserFirebase();
-                          },
-                          child: const Text(
-                            "Entrar",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
+                        height: 150,
+                        child: Image.asset(
+                          AssetLoader.logoBuildingImg,
                         ),
                       ),
+                      const SizedBox(height: 70),
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            InputDataLoginWidget(
+                              labelText: "E-mail",
+                              controller: controller.store.emailController,
+                              focusNode: controller.store.focusNodeEmail,
+                              textTextField: (value) {
+                                controller.store.emailText = value;
+                              },
+                              textInputType: TextInputType.emailAddress,
+                              obscureText: false,
+                              suffixIcon: null,
+                            ),
+                            const SizedBox(height: 20),
+                            InputDataLoginWidget(
+                              labelText: "Senha",
+                              controller: controller.store.passwordController,
+                              focusNode: controller.store.focusNodePassword,
+                              textTextField: (value) {
+                                controller.store.passwordText = value;
+                              },
+                              textInputType: null,
+                              obscureText: showPassword,
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  _togglevisibility();
+                                },
+                                child: Icon(
+                                  showPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: const Color(0XFFBCD6C8),
+                                  size: 26,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 60),
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                ),
+                                onPressed: () {
+                                  LoginModule.to.actions
+                                      .signinLoginUserFirebase(context);
+                                },
+                                child: const Text(
+                                  "Entrar",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 70),
+                      const Text("Precisa de ajuda?")
                     ],
                   ),
                 ),

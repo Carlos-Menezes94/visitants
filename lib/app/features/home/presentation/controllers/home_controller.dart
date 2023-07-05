@@ -73,13 +73,17 @@ class HomeController extends Controller {
         text: failure.message,
       );
     }, (sucess) {
-      LoginModule.to.navigator.pop();
-
+      navigatorToHome();
       return ToastHandler().showMyCustomToast(context,
           backgroundColor: Colors.greenAccent.shade400,
           color: Colors.black,
           text: "Visitante cadastrado com sucesso!");
     });
+  }
+
+  void navigatorToHome() {
+    LoginModule.to.navigator.pop();
+    clearTextField();
   }
 
   void showContacts() {
@@ -92,7 +96,7 @@ class HomeController extends Controller {
   }
 
   String? validCpf(String value) {
-    String textInput = value.toString().replaceAll('.', '').replaceAll('-', '');
+    // String textInput = value.toString().replaceAll('.', '').replaceAll('-', '');
     return null;
     // return Validador()
     //     .add(Validar.CPF, msg: 'CPF Inválido')

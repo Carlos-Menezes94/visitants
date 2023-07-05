@@ -29,13 +29,10 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Visitante'),
+        title: const Text('Cadastro de Visitante'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            controller.clearTextField();
-            Navigator.of(context).pop();
-          },
+          icon: const Icon(Icons.arrow_back),
+          onPressed: controller.navigatorToHome,
         ),
       ),
       body: Padding(
@@ -46,7 +43,7 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
             children: [
               TextFormField(
                 controller: controller.store.nameController,
-                decoration: InputDecoration(labelText: 'Nome'),
+                decoration: const InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return '[Por favor, insira um nome]';
@@ -57,14 +54,17 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
               TextFormField(
                 inputFormatters: [CPFMask.inputMask],
                 controller: controller.store.cpfController,
-                decoration: InputDecoration(labelText: 'CPF'),
+                decoration: const InputDecoration(labelText: 'CPF'),
                 validator: (value) {
-                  return controller.validCpf(value!);
+                  if (value!.isEmpty) {
+                    return '[Por favor, insira um CPF]';
+                  }
+                  return null;
                 },
               ),
               TextFormField(
                 controller: controller.store.visitLocationController,
-                decoration: InputDecoration(labelText: 'Local à visitar'),
+                decoration: const InputDecoration(labelText: 'Local à visitar'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return '[Por favor, insira um local]';
@@ -74,12 +74,15 @@ class VisitorRegistrationPageState extends StatePage<HomeModule,
               ),
               TextFormField(
                 controller: controller.store.carPlateController,
-                decoration: InputDecoration(labelText: 'Placa do carro'),
+                decoration: const InputDecoration(labelText: 'Placa do carro'),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Enviar'),
+                child: const Text(
+                  'Enviar',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
