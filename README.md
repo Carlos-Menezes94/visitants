@@ -27,3 +27,7 @@ Antes de executar o aplicativo, é necessário configurar o projeto com as crede
 ## Releases
 
 - Link: [Release 1.0.0](https://drive.google.com/file/d/1tG_Zi7fHgtY-HKjhtsbAe8D7JvGPXxyN/view?usp=sharing)  - Em Desenvolvimento
+
+- Login:
+email: rafael@gmail.com
+senha: teste@21
