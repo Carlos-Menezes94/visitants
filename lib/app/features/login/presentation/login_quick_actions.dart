@@ -56,7 +56,7 @@ class LoginQuickActions extends QuickActions<LoginModule> {
     store.state.value = AppState.loading();
 
     final response = await signInLoginUseCase.signinLogin(
-        password: store.passwordText, email: store.emailText);
+        password: store.passwordText, email: store.emailText.trim());
 
     response.fold((failure) {
       store.state.value = AppState.error();
