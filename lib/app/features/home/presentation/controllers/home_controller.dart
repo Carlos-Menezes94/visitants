@@ -48,6 +48,7 @@ class HomeController extends Controller {
       );
     }, (sucess) {
       store.state.value = AppState.success();
+      sucess.sort((a, b) => b.dateTimeRegister!.compareTo(a.dateTimeRegister!));
       store.listVisitor.value = sucess;
       LoginModule.to.navigator.pushNamed(ListVisitorPage.routeName);
     });
