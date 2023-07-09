@@ -1,11 +1,11 @@
 import 'package:visitants/app/features/login/presentation/login_injector.dart';
 import 'package:visitants/app/features/login/presentation/pages/login_page.dart';
 import 'package:visitants/app/features/login/presentation/login_quick_actions.dart';
+import 'package:visitants/app/features/login/presentation/pages/need_help_page.dart';
 
 import '../../../../module/module.dart';
 import '../../../../module/module_injector.dart';
 import '../../../../module/quick_actions.dart';
-
 
 class LoginModule extends Module
     with QuickActionsMixin<LoginModule, LoginQuickActions> {
@@ -29,6 +29,7 @@ class LoginModule extends Module
 
   @override
   Map<String, RouteBuilder> get routes => {
-        LoginPage.routeName: (context, arguments) => LoginPage(),
+        LoginPage.routeName: (context, arguments) => const LoginPage(),
+        NeedHelpPage.routeName: (context, arguments) => const NeedHelpPage()
       };
 }

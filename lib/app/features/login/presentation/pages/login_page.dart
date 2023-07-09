@@ -7,6 +7,7 @@ import 'package:visitants/core/state.dart';
 import '../../../../../core/asset_loader.dart';
 import '../controllers/login_controller.dart';
 import '../widgets/input_data_login_widget.dart';
+import 'need_help_page.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/LoginPage';
@@ -53,8 +54,7 @@ class LoginPageState
                   child: SizedBox(
                     child: Lottie.asset(
                       AssetLoader.buildingLottie,
-                      fit: BoxFit
-                          .cover,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 );
@@ -144,7 +144,13 @@ class LoginPageState
                         ),
                       ),
                       const SizedBox(height: 70),
-                      const Text("Precisa de ajuda?")
+                      InkWell(
+                        onTap: () {
+                          LoginModule.to.navigator
+                              .pushNamed(NeedHelpPage.routeName);
+                        },
+                        child: const Text("Precisa de ajuda?"),
+                      )
                     ],
                   ),
                 ),
