@@ -9,4 +9,5 @@ class AssetLoader {
 
 //ANIMATION
   static const String buildingLottie = "$path/$animations/building_lottie.json";
+  static const String sucessLottie = "$path/$animations/success_lottie.json";
 }

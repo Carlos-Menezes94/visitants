@@ -13,6 +13,7 @@ class RecoverPasswordInjector extends ModuleInjector<RecoverPasswordModule> {
   void controllers() {
     registerFactory(() => RecoverPasswordController(
           usecase: get<RecoverPasswordUseCase>(),
+          store: get<RecoverPasswordStore>(),
         ));
   }
 
