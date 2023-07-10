@@ -41,15 +41,15 @@ class HomeController extends Controller {
       store.state.value = AppState.error();
 
       return ToastHandler().showMyCustomToast(
+        isStateSucess: false,
         context,
-        backgroundColor: Colors.yellowAccent.shade400,
-        color: Colors.black,
         text: failure.message,
       );
-    }, (sucess) {
+    }, (listVisitorsData) {
       store.state.value = AppState.success();
-      sucess.sort((a, b) => b.dateTimeRegister!.compareTo(a.dateTimeRegister!));
-      store.listVisitor.value = sucess;
+      listVisitorsData
+          .sort((a, b) => b.dateTimeRegister!.compareTo(a.dateTimeRegister!));
+      store.listVisitor.value = listVisitorsData;
       LoginModule.to.navigator.pushNamed(ListVisitorPage.routeName);
     });
   }
@@ -68,17 +68,16 @@ class HomeController extends Controller {
 
     response.fold((failure) {
       return ToastHandler().showMyCustomToast(
+        isStateSucess: false,
         context,
-        backgroundColor: Colors.yellowAccent.shade400,
-        color: Colors.black,
         text: failure.message,
       );
     }, (sucess) {
       navigatorToHome();
-      return ToastHandler().showMyCustomToast(context,
-          backgroundColor: Colors.greenAccent.shade400,
-          color: Colors.black,
-          text: "Visitante cadastrado com sucesso!");
+      return ToastHandler().showMyCustomToast(
+          isStateSucess: true,
+          text: "Visitante cadastrado com sucesso!",
+          context);
     });
   }
 

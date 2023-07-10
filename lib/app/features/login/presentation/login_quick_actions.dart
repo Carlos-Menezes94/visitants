@@ -62,9 +62,8 @@ class LoginQuickActions extends QuickActions<LoginModule> {
       store.state.value = AppState.error();
 
       return ToastHandler().showMyCustomToast(
+        isStateSucess: false,
         context,
-        backgroundColor: Colors.yellowAccent.shade400,
-        color: Colors.black,
         text: failure.message,
       );
     }, (sucess) {
