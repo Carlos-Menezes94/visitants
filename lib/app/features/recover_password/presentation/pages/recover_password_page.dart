@@ -62,7 +62,7 @@ class _RecoverPasswordPageState extends StatePage<RecoverPasswordModule,
                   TextFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Por favor, insira um nome';
+                        return 'Por favor, insira um e-mail';
                       }
                       return null;
                     },
