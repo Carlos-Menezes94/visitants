@@ -21,29 +21,40 @@ class _NeedHelpPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Precisando de ajuda?")),
-      body: Column(children: [
-        const SizedBox(height: 200),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              LoginModule.to.navigator.pushNamed(RecoverPasswordPage.routeName);
-              
-            },
-            child: const Text(
-              "Esqueceu sua senha?",
-              style: TextStyle(color: Colors.black),
-            ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(children: [
+          const SizedBox(height: 200),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => LoginModule.to.navigator
+                      .pushNamed(RecoverPasswordPage.routeName),
+                  child: const Text(
+                    "Esqueceu sua senha?",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text(
-            "Cadastrar novo usuario?",
-            style: TextStyle(color: Colors.black),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Cadastrar novo usuario?",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
