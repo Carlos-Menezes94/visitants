@@ -35,19 +35,25 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
     //   }
     // }
 
-    try {
-      await docRef.update({
-        'lista': FieldValue.arrayUnion([visitorData.toJson()]),
-        'lastFirestoreUpdate': DateTime.now().toString()
-      });
+    await docRef.update({
+      'lista': FieldValue.arrayUnion([visitorData.toJson()]),
+      'lastFirestoreUpdate': DateTime.now().toString()
+    });
 
-      return DataSourceResponse(success: true, data: "Sucesso");
-    } catch (error) {
-      return DataSourceResponse(
-          success: false,
-          data: throw Exception(
-              '--------- Erro ao adicionar o novo item: $error ---------'));
-    }
+    return DataSourceResponse(success: true, data: "");
+    // try {
+    //   await docRef.update({
+    //     'lista': FieldValue.arrayUnion([visitorData.toJson()]),
+    //     'lastFirestoreUpdate': DateTime.now().toString()
+    //   });
+
+    //   return DataSourceResponse(success: true, data: "Sucesso");
+    // } catch (error) {
+    //   return DataSourceResponse(
+    //       success: false,
+    //       data: throw Exception(
+    //           '--------- Erro ao adicionar o novo item: $error ---------'));
+    // }
   }
 
   @override
