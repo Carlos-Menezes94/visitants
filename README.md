@@ -23,3 +23,11 @@ O projeto segue a arquitetura Clean Architecture, com uma separação clara de c
 ## Configuração do Projeto
 
 Antes de executar o aplicativo, é necessário configurar o projeto com as credenciais do Firebase Firestore, então configure o ambiente do firebase com suas credenciais.
+
+## Releases
+
+- Link: [Release 1.0.0](https://drive.google.com/file/d/1tG_Zi7fHgtY-HKjhtsbAe8D7JvGPXxyN/view?usp=sharing)  - Em Desenvolvimento
+
+- Login:
+email: rafael@gmail.com
+senha: teste@21
