@@ -35,6 +35,11 @@ class RecoverPasswordController extends Controller {
         LoginModule.to.navigator.pushNamed(LoginPage.routeName);
 
         store.state.value = AppState.idle();
+           return ToastHandler().showMyCustomToast(
+        isStateSucess: true,
+        context,
+        text:"Foi enviado um link para redefinir sua senha, acesse a caixa de entrada",
+      );
       });
 
       return sucessSendLinkToRecoverPassword;
