@@ -20,10 +20,10 @@ class HomeModule extends Module
 
   @override
   Map<String, RouteBuilder> get routes => {
-        HomePage.routeName: (context, arguments) => HomePage(),
-        ListVisitorPage.routeName: (context, arguments) => ListVisitorPage(),
+        HomePage.routeName: (context, arguments) => const HomePage(),
+        ListVisitorPage.routeName: (context, arguments) => const ListVisitorPage(),
         VisitorRegistrationPage.routeName: (context, arguments) =>
-            VisitorRegistrationPage()
+            const VisitorRegistrationPage()
       };
 
   @override

@@ -28,8 +28,6 @@ class HomeInjector extends ModuleInjector<HomeModule> {
   @override
   void core() {
     registerSingleton(LocalStorageService());
-
-    // registerFactory(() => FirebaseInstances(FirebaseAuth.instance));
   }
 
   @override

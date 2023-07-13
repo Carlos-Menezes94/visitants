@@ -52,17 +52,16 @@ class HomePageState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Olá, seja bem-vindo!",
-                      ),
-                      Text(
-                        "${controller.loginStore.firebaseAuth.value.currentUser!.email}",
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ],
+                  const Text(
+                    "Olá, seja bem-vindo!",
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "${controller.loginStore.firebaseAuth.value.currentUser!.email}",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    ),
                   ),
                   const SizedBox(height: 100),
                   SizedBox(
