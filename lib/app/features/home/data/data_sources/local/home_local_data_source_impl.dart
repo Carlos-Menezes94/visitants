@@ -20,11 +20,6 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSourceAbstract {
         directory: 'box_date_time_last_update',
         data: DateTime.now().toString(),
         key: 'lastDateTimeUpdate');
-// // 
-//     final boxDateTimeLastUpdate =
-//         await Hive.openBox('box_date_time_last_update');
-
-//     await boxDateTimeLastUpdate.put('lastDateTimeUpdate', DateTime.now());
 
     final box = await localStorage.insertData(
       directory: VisitorModel.hiveBoxKey,
@@ -37,12 +32,6 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSourceAbstract {
 
   @override
   Future<DataSourceResponse<List>> getListVisitorsLocal() async {
-    // final collectionVisitorsTable =
-    //     FirebaseFirestore.instance.collection('tabela_pessoas');
-    // final docRef = collectionVisitorsTable.doc('cadastrados');
-
-    // final response = await docRef.get();
-
     final response =
         await localStorage.recoverDirectory(directory: 'model_visitors');
     if (response.isNotEmpty) {

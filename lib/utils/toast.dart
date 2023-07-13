@@ -15,7 +15,7 @@ class ToastHandler {
       reverseAnimation: StyledToastAnimation.slideToBottomFade,
       position: StyledToastPosition.bottom,
       animDuration: const Duration(seconds: 1),
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 5),
       curve: Curves.elasticOut,
       reverseCurve: Curves.linear,
       borderRadius: BorderRadius.circular(5.0),
