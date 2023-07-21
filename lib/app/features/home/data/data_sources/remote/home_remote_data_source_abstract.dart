@@ -4,4 +4,5 @@ import 'package:visitants/core/response.dart';
 abstract class HomeRemoteDataSourceAbstract {
   Future<DataSourceResponse> registerNewVisitorFirestore(VisitorModel visitor);
   Future<DataSourceResponse> getListVisitors();
+  Future<DataSourceResponse> adminCheckInDataSource();
 }
