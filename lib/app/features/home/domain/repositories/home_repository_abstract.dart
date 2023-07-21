@@ -8,4 +8,5 @@ abstract class HomeRepositoryAbstract {
       {required VisitorModel visitor});
 
   Future<Either<Failure, List<VisitorModel>>> getListVisitors();
+  Future<Either<Failure, bool>> adminCheckInRepository();
 }

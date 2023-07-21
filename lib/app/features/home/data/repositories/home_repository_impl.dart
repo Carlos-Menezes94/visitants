@@ -79,4 +79,25 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
       return Left(CantGetListVisitorsFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> adminCheckInRepository() async {
+    try {
+      bool isCheckInVerify = false;
+      final response = await dataSourceRemote.adminCheckInDataSource();
+
+      final listOfMaps = response.data['lista'].cast<Map<String, dynamic>>();
+
+      for (var element in listOfMaps) {
+        if (element["isAdmin"].toString().trim().contains("teste@gmail.acom")) {
+          isCheckInVerify = true;
+        } else {
+          isCheckInVerify = false;
+        }
+      }
+      return Right(isCheckInVerify);
+    } catch (error) {
+      return Left(throw UnimplementedError());
+    }
+  }
 }
