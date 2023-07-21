@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/core/response.dart';
 import '../../../../../core/failure.dart';
@@ -73,6 +74,8 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
         }
       }
     } catch (error) {
+      await Sentry.captureException(error);
+
       return Left(CantGetListVisitorsFailure());
     }
   }

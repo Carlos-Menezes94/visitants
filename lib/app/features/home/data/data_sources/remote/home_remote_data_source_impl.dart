@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
 import 'package:visitants/core/response.dart';
 
@@ -79,6 +80,8 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
     if (response.exists) {
       return DataSourceResponse(success: true, data: response);
     } else {
+      await Sentry.captureException(response.data);
+
       return DataSourceResponse(success: false, data: response);
     }
   }

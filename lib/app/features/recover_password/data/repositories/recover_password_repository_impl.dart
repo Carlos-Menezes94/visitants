@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:visitants/app/features/recover_password/domain/repositories/recover_password_repository_abstract.dart';
 
 import '../../../../../core/failure.dart';
 import '../datasources/recover_password_data_source_impl.dart';
 import '../failures/error_recover_password_failure.dart';
-import '../failures/internal_network_failure.dart';
 import '../failures/invalid_email_failure.dart.dart';
 import '../failures/network_request_failed_failure.dart';
 import '../failures/too_many_requests_failure.dart';
@@ -31,9 +31,9 @@ class RecoverPasswordRepositoryImpl
             return Left(TooManyRequestsFailure());
           case "network-request-failed":
             return Left(NetworkRequestFailedFailure());
-          case "internal-error":
-            return Left(InternalNetworkFailure());
           default:
+            await Sentry.captureException(response.data);
+
             return Left(ErrorRecoverPasswordFailure());
         }
       } else {
