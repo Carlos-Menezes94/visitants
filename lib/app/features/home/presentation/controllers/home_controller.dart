@@ -128,12 +128,17 @@ class HomeController extends Controller {
   }
 
   Future<void> adminCheckIn() async {
-    final response = await adminCheckInUseCase.adminCheckInUseCase();
+    store.state.value = AppState.loading();
+
+    final response = await adminCheckInUseCase.adminCheckInUseCase(
+        emailAdmin: loginStore.firebaseAuth.value.currentUser!.email!);
 
     response.fold((failure) {
-      print(failure.message);
+      store.isAdmin = false;
+      debugPrint(failure.message);
     }, (sucess) {
-      print(sucess);
+      store.isAdmin = sucess;
+      store.state.value = AppState.success();
     });
   }
 }

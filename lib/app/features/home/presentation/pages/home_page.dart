@@ -19,6 +19,14 @@ class HomePage extends StatefulWidget {
 class HomePageState
     extends StatePage<HomeModule, HomePage, HomeController, HomeStore> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await controller.adminCheckIn();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -59,8 +67,8 @@ class HomePageState
                   Text(
                     "${controller.loginStore.firebaseAuth.value.currentUser!.email}",
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.grey,
+                    style: TextStyle(
+                      color: store.isAdmin ? Colors.red : Colors.grey,
                     ),
                   ),
                   const SizedBox(height: 100),
@@ -133,8 +141,21 @@ class HomePageState
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 40,
+                  const SizedBox(height: 16),
+                  Offstage(
+                    offstage: !store.isAdmin,
+                    child: SizedBox(
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          controller.adminCheckIn();
+                        },
+                        child: const Text(
+                          "Cadastrar novo usuário",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
