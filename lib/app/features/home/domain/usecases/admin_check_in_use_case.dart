@@ -7,7 +7,7 @@ class AdminCheckInUseCase {
 
   AdminCheckInUseCase({required this.repository});
 
-  Future<Either<Failure, bool>> adminCheckInUseCase() async {
-    return repository.adminCheckInRepository();
+  Future<Either<Failure, bool>> adminCheckInUseCase({required String emailAdmin}) async {
+    return repository.adminCheckInRepository(emailAdmin: emailAdmin);
   }
 }

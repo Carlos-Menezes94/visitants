@@ -81,7 +81,8 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
   }
 
   @override
-  Future<Either<Failure, bool>> adminCheckInRepository() async {
+  Future<Either<Failure, bool>> adminCheckInRepository(
+      {required String emailAdmin}) async {
     try {
       bool isCheckInVerify = false;
       final response = await dataSourceRemote.adminCheckInDataSource();
@@ -89,10 +90,8 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
       final listOfMaps = response.data['lista'].cast<Map<String, dynamic>>();
 
       for (var element in listOfMaps) {
-        if (element["isAdmin"].toString().trim().contains("teste@gmail.acom")) {
-          isCheckInVerify = true;
-        } else {
-          isCheckInVerify = false;
+        if (element["email"].toString().contains(emailAdmin)) {
+          return const Right(true);
         }
       }
       return Right(isCheckInVerify);
