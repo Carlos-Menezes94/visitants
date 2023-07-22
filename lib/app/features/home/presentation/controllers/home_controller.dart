@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:visitants/app/features/home/data/models/visitor_model.dart';
+import 'package:visitants/app/features/home/domain/usecases/admin_check_in_use_case.dart';
 import 'package:visitants/app/features/home/domain/usecases/create_new_registration_visitor_use_case.dart';
 import 'package:visitants/app/features/home/domain/usecases/get_list_visitor_usecase.dart';
 import 'package:visitants/app/features/home/presentation/stores/home_store.dart';
@@ -17,9 +18,11 @@ class HomeController extends Controller {
   final CreateNewRegistrationVisitorUseCase createNewRegistrationVisitorUseCase;
   final HomeStore store;
   final LoginStore loginStore;
+  final AdminCheckInUseCase adminCheckInUseCase;
 
   HomeController(
-      {required this.getListVisitorUsecase,
+      {required this.adminCheckInUseCase,
+      required this.getListVisitorUsecase,
       required this.loginStore,
       required this.createNewRegistrationVisitorUseCase,
       required this.store});
@@ -122,5 +125,15 @@ class HomeController extends Controller {
     store.cpfController.clear();
     store.visitLocationController.clear();
     store.carPlateController.clear();
+  }
+
+  Future<void> adminCheckIn() async {
+    final response = await adminCheckInUseCase.adminCheckInUseCase();
+
+    response.fold((failure) {
+      print(failure.message);
+    }, (sucess) {
+      print(sucess);
+    });
   }
 }

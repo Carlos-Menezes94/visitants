@@ -9,6 +9,7 @@ import '../../../../module/module_injector.dart';
 
 import '../data/data_sources/local/home_local_data_source_impl.dart';
 import '../data/data_sources/remote/home_remote_data_source_impl.dart';
+import '../domain/usecases/admin_check_in_use_case.dart';
 import 'controllers/home_controller.dart';
 import 'home_module.dart';
 
@@ -22,6 +23,8 @@ class HomeInjector extends ModuleInjector<HomeModule> {
               HomeModule.to.injector.get<GetListVisitorUsecase>(),
           createNewRegistrationVisitorUseCase:
               HomeModule.to.injector.get<CreateNewRegistrationVisitorUseCase>(),
+          adminCheckInUseCase:
+              HomeModule.to.injector.get<AdminCheckInUseCase>(),
         ));
   }
 
@@ -59,6 +62,8 @@ class HomeInjector extends ModuleInjector<HomeModule> {
     registerFactory(() => GetListVisitorUsecase(
         repository: HomeModule.to.injector.get<HomeRepositoryImpl>()));
     registerFactory(() => CreateNewRegistrationVisitorUseCase(
+        repository: HomeModule.to.injector.get<HomeRepositoryImpl>()));
+    registerFactory(() => AdminCheckInUseCase(
         repository: HomeModule.to.injector.get<HomeRepositoryImpl>()));
   }
 }
