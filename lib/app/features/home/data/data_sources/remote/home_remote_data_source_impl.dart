@@ -85,4 +85,19 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceAbstract {
       return DataSourceResponse(success: false, data: response);
     }
   }
+
+    @override
+  Future<DataSourceResponse> adminCheckInDataSource() async {
+    final collectionVisitorsTable =
+        FirebaseFirestore.instance.collection('users');
+    final docRef = collectionVisitorsTable.doc('zOKVMLCeOBD24Ucysx6D');
+
+    final response = await docRef.get();
+
+    if (response.exists) {
+      return DataSourceResponse(success: true, data: response);
+    } else {
+      return DataSourceResponse(success: false, data: false);
+    }
+  }
 }

@@ -79,4 +79,24 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
       return Left(CantGetListVisitorsFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> adminCheckInRepository(
+      {required String emailAdmin}) async {
+    try {
+      bool isCheckInVerify = false;
+      final response = await dataSourceRemote.adminCheckInDataSource();
+
+      final listOfMaps = response.data['lista'].cast<Map<String, dynamic>>();
+
+      for (var element in listOfMaps) {
+        if (element["email"].toString().contains(emailAdmin)) {
+          return const Right(true);
+        }
+      }
+      return Right(isCheckInVerify);
+    } catch (error) {
+      return Left(throw UnimplementedError());
+    }
+  }
 }
