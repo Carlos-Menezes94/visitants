@@ -2,12 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:visitants/app/features/home/presentation/home_module.dart';
 import 'package:visitants/module/module_app.dart';
-import 'app/features/login/presentation/login_module.dart';
-import 'app/features/recover_password/presentation/recover_password_module.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import 'app/home/presentation/home_module.dart';
+import 'app/login/presentation/login_module.dart';
+import 'app/recover_password/presentation/recover_password_module.dart';
 import 'core/firebase_options.dart';
 
 Future<void> main() async {

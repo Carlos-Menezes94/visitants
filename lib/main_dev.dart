@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'app/features/home/presentation/home_module.dart';
-import 'app/features/login/presentation/login_module.dart';
-import 'app/features/recover_password/presentation/recover_password_module.dart';
+
+import 'app/home/presentation/home_module.dart';
+import 'app/login/presentation/login_module.dart';
+import 'app/recover_password/presentation/recover_password_module.dart';
 import 'core/firebase_options.dart';
 import 'module/module_app.dart';
 

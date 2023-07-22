@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../app/features/home/data/models/visitor_model.dart';
+import '../../app/home/data/models/visitor_model.dart';
 import 'local_storage_data.dart';
 
 class LocalStorageService {
@@ -8,15 +8,9 @@ class LocalStorageService {
     await Hive.initFlutter();
   }
 
-// ignore: non_constant_identifier_names
   LocalStorageService() {
     Hive.registerAdapter(VisitorModelAdapter());
-    // Hive.registerAdapter(LoginDataAdapter());
-    // Hive.registerAdapter(NotificationHelperAdapter());
-    // Hive.registerAdapter(MonitoringInfoModelAdapter());
-    // Hive.registerAdapter(EventModelAdapter());
-    // Hive.registerAdapter(EventTypeAdapter());
-    // Hive.registerAdapter(CustomTimerModelAdapter());
+
     initHive();
   }
 
