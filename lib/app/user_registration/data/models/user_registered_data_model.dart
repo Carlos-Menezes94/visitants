@@ -5,7 +5,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 @HiveType(typeId: 1)
 class UserRegisteredDataModel extends HiveObject {
-
   @HiveField(0)
   late String? name;
 
@@ -18,15 +17,19 @@ class UserRegisteredDataModel extends HiveObject {
   @HiveField(3)
   late String? occupation;
 
-  @HiveField(5)
+  @HiveField(4)
   late String? dateTimeRegistration;
+
+  @HiveField(5)
+  late bool? isAdminUser;
 
   UserRegisteredDataModel(
       {required this.name,
       required this.email,
       required this.password,
       required this.occupation,
-      required this.dateTimeRegistration});
+      required this.dateTimeRegistration,
+      required this.isAdminUser});
 
   factory UserRegisteredDataModel.fromJson(Map<String, dynamic> json) {
     return UserRegisteredDataModel(
@@ -34,7 +37,8 @@ class UserRegisteredDataModel extends HiveObject {
         email: json['email'] ?? " -- Empty -- ",
         password: json['password'] ?? " -- Empty -- ",
         occupation: json['occupation'] ?? " -- Empty -- ",
-        dateTimeRegistration: json['dateTimeRegistration'] ?? " -- Empty -- ");
+        dateTimeRegistration: json['dateTimeRegistration'] ?? " -- Empty -- ",
+        isAdminUser: json['isAdminUser'] == "false" );
   }
 
   static List<UserRegisteredDataModel> fromJsonList(List<dynamic> jsonList) {
@@ -49,7 +53,8 @@ class UserRegisteredDataModel extends HiveObject {
       'email': email,
       'password': password,
       'occupation': occupation,
-      'dateTimeRegistration': dateTimeRegistration
+      'dateTimeRegistration': dateTimeRegistration,
+      'isAdminUser': isAdminUser
     };
   }
 }

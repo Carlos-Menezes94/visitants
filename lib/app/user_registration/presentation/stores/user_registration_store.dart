@@ -9,6 +9,11 @@ class UserRegistrationStore extends Store {
   TextEditingController password = TextEditingController();
   ValueNotifier<UserRegisteredDataModel> userDataInformation =
       ValueNotifier<UserRegisteredDataModel>(UserRegisteredDataModel(
-          name: "", email: "", password: "", occupation: "", dateTimeRegistration: ''));
+          name: "",
+          email: "",
+          password: "",
+          occupation: "",
+          dateTimeRegistration: '',
+          isAdminUser: false));
   ValueNotifier<AppState> state = ValueNotifier<AppState>(AppState());
 }
