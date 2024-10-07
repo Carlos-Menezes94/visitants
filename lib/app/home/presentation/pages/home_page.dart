@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visitants/app/home/presentation/pages/visitor_registration_page.dart';
+import 'package:visitants/app/user_registration/presentation/pages/user_registration_page.dart';
 import 'package:visitants/core/state.dart';
 
 import '../../../login/presentation/login_module.dart';
@@ -31,9 +32,12 @@ class HomePageState
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-            child: Text(
-          "Home",
-          style: TextStyle(color: Colors.white),
+            child: Padding(
+          padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
+          child: Text(
+            "Home",
+            style: TextStyle(color: Colors.white),
+          ),
         )),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
@@ -44,7 +48,7 @@ class HomePageState
               color: Colors.white,
             ),
             onPressed: () {
-              LoginModule.to.actions.logout();
+              LoginModule.to.actions.logout(context);
             },
           )
         ],
@@ -148,7 +152,8 @@ class HomePageState
                       height: 40,
                       child: ElevatedButton(
                         onPressed: () {
-                          controller.adminCheckIn();
+                          LoginModule.to.navigator
+                              .pushNamed(UserRegistrationPage.routeName);
                         },
                         child: const Text(
                           "Cadastrar novo usuário",

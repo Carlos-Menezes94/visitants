@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 import 'package:visitants/core/state.dart';
 import '../../../../../core/asset_loader.dart';
 import '../controllers/login_controller.dart';
@@ -32,6 +33,28 @@ class LoginPageState
     });
     super.initState();
   }
+
+  // Future<void> _logout(BuildContext context) async {
+  //   try {
+  //     await GoogleSignIn().signOut();
+  //     // Se você também estiver usando Firebase, pode adicionar FirebaseAuth.instance.signOut() aqui
+  //     // FirebaseAuth.instance.signOut();
+  //     // Limpar as informações de autenticação do usuário e navegar de volta para a tela de login ou a tela inicial do seu aplicativo.
+  //     // Navigator.pushReplacementNamed(context, '/login'); // Exemplo de navegação para a tela de login
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Logout do Google realizado com sucesso.'),
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     print('Erro ao fazer logout do Google: $error');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Erro ao fazer logout do Google. Tente novamente.'),
+  //       ),
+  //     );
+  //   }
+  // }
 
   bool showPassword = false;
   void _togglevisibility() {
@@ -117,13 +140,23 @@ class LoginPageState
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 20),
+                            SignInButton(
+                              Buttons.google,
+                              text: "Sign up with Google",
+                              onPressed: () {
+                                controller.loginSocial();
+                                // _handleSignIn();
+                              },
+                              elevation: 2,
+                            ),
                             const SizedBox(height: 60),
                             SizedBox(
                               height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all<Color>(
+                                      WidgetStateProperty.all<Color>(
                                           Colors.black),
                                 ),
                                 onPressed: () {

@@ -35,6 +35,7 @@ class UserRegistrationController extends Controller {
       Future.delayed(const Duration(seconds: 5), () {
         LoginModule.to.navigator.pushNamed(LoginPage.routeName);
         store.state.value = AppState.idle();
+        FocusScope.of(context).nextFocus();
         return ToastHandler().showMyCustomToast(
           isStateSucess: true,
           context,

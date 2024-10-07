@@ -8,5 +8,7 @@ abstract class LoginRepositoryAbstract {
       {required String password, required String email});
   Future<Either<Failure, String>> registerLogin(
       {required String password, required String email});
-        Future<Either<Failure, String>> logoutLogin();
+  Future<Either<Failure, String>> logoutLogin();
+
+  Future<Either<Failure, void>> socialLogin();
 }

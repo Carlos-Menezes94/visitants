@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:visitants/core/state.dart';
 
 import '../../../recover_password/presentation/pages/recover_password_page.dart';
+import '../../../user_registration/presentation/pages/user_registration_page.dart';
 import '../controllers/login_controller.dart';
 import '../login_module.dart';
 import '../stores/login_store.dart';
@@ -44,7 +45,10 @@ class _NeedHelpPageState
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    LoginModule.to.navigator
+                        .pushNamed(UserRegistrationPage.routeName);
+                  },
                   child: const Text(
                     "Cadastrar novo usuario?",
                     style: TextStyle(color: Colors.black),

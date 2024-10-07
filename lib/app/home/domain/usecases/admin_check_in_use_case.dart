@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:visitants/app/home/domain/repositories/home_repository_abstract.dart';
 import '../../../../../core/failure.dart';
-import '../../data/repositories/home_repository_impl.dart';
 
 class AdminCheckInUseCase {
-  final HomeRepositoryImpl repository;
+  final HomeRepositoryAbstract repository;
 
   AdminCheckInUseCase({required this.repository});
 

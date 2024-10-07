@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:visitants/core/response.dart';
 import '../../../../../core/failure.dart';
+import '../../../user_registration/data/models/user_registered_data_model.dart';
 import '../../domain/failures/cant_created_new_visitor_failure.dart';
 import '../../domain/failures/cant_get_list_visitors_failure.dart';
 import '../../domain/failures/list_is_empty_failure.dart';
@@ -87,14 +88,41 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
     try {
       bool isCheckInVerify = false;
       final response = await dataSourceRemote.adminCheckInDataSource();
+      print(response.data['lista']);
+      String desiredEmail = "uuuuuu@gmail.com";
 
-      final listOfMaps = response.data['lista'].cast<Map<String, dynamic>>();
+      // final listOfMaps = response.data['lista'].cast<Map<String, dynamic>>();
+      List<UserRegisteredDataModel> users = response.data['lista']
+          .map<UserRegisteredDataModel>(
+              (item) => UserRegisteredDataModel.fromJson(item))
+          .toList();
 
-      for (var element in listOfMaps) {
-        if (element["email"].toString().contains(emailAdmin)) {
-          return const Right(true);
+      // // Encontre o primeiro elemento com isAdmin == true
+      // UserRegisteredDataModel? adminUser =
+      //     users.firstWhere((element) => element.isAdminUser!);
+
+      if (users.isNotEmpty) {
+        // Se encontrou o usuário com o e-mail desejado, verificar se é administrador
+        UserRegisteredDataModel? user = users.firstWhere(
+            (user) => user.email == desiredEmail.trim(),
+          );
+        if (user != null) {
+           isCheckInVerify = user.isAdminUser!;
+          print(
+              'O usuário com e-mail $desiredEmail é um administrador? $isCheckInVerify');
+        } else {
+          print('Usuário com e-mail $desiredEmail não encontrado.');
         }
+      } else {
+        print('Lista de usuários vazia.');
       }
+
+      // for (var element in listOfMaps) {
+      //   if (element["email"].toString().contains(emailAdmin)) {
+      //     response.data['lista'];
+      //     return const Right(true);
+      //   }
+      // }
       return Right(isCheckInVerify);
     } catch (error) {
       return Left(throw UnimplementedError());

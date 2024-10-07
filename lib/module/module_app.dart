@@ -56,6 +56,9 @@ class _ModuleAppState extends State<ModuleApp> {
       }
       index++;
     }
+    if (routeBuilder == null) {
+      throw ('Rota ${settings.name} não encontrada.');
+    }
 
     return routeBuilder;
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:visitants/app/login/domain/usecases/logout_use_case.dart';
 import 'package:visitants/app/login/presentation/pages/login_page.dart';
 import 'package:visitants/app/login/presentation/stores/login_store.dart';
 import '../../../../core/app_state.dart';
@@ -10,16 +11,24 @@ import '../domain/usecases/signin_login_use_case.dart';
 import 'login_module.dart';
 
 class LoginQuickActions extends QuickActions<LoginModule> {
-  void logout() async {
+  void logout(BuildContext context) async {
     final store = injector.get<LoginStore>();
 
     store.state.value = AppState.loading();
+    final LogoutUseCase logoutLoginUseCase = injector.get<LogoutUseCase>();
 
-    final FirebaseAuth authServiceauth = FirebaseAuth.instance;
-
-    await authServiceauth.signOut();
-    store.didCheckAuth = false;
-    checkAuth();
+    final response =
+        await logoutLoginUseCase.logoutLoginUser(email: "", password: "");
+    response.fold((failure) {
+      return ToastHandler().showMyCustomToast(
+        isStateSucess: false,
+        context,
+        text: failure.message,
+      );
+    }, (sucess) {
+      store.didCheckAuth = false;
+      checkAuth();
+    });
   }
 
   Future<void> checkAuth() async {
