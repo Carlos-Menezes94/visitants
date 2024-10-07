@@ -184,11 +184,6 @@ class LoginPageState
                         },
                         child: const Text("Precisa de ajuda?"),
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            _logout(context);
-                          },
-                          child: child)
                     ],
                   ),
                 ),
