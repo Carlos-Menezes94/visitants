@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:visitants/app/home/domain/failures/cant_realize_of_login_failure.dart';
 import 'package:visitants/core/response.dart';
 import '../../../../../core/failure.dart';
 import '../../../user_registration/data/models/user_registered_data_model.dart';
@@ -88,43 +89,27 @@ class HomeRepositoryImpl implements HomeRepositoryAbstract {
     try {
       bool isCheckInVerify = false;
       final response = await dataSourceRemote.adminCheckInDataSource();
-      print(response.data['lista']);
-      String desiredEmail = "uuuuuu@gmail.com";
 
-      // final listOfMaps = response.data['lista'].cast<Map<String, dynamic>>();
       List<UserRegisteredDataModel> users = response.data['lista']
           .map<UserRegisteredDataModel>(
               (item) => UserRegisteredDataModel.fromJson(item))
           .toList();
 
-      // // Encontre o primeiro elemento com isAdmin == true
-      // UserRegisteredDataModel? adminUser =
-      //     users.firstWhere((element) => element.isAdminUser!);
-
       if (users.isNotEmpty) {
-        // Se encontrou o usuário com o e-mail desejado, verificar se é administrador
-        UserRegisteredDataModel? user = users.firstWhere(
-            (user) => user.email == desiredEmail.trim(),
-          );
-        if (user != null) {
-           isCheckInVerify = user.isAdminUser!;
-          print(
-              'O usuário com e-mail $desiredEmail é um administrador? $isCheckInVerify');
-        } else {
-          print('Usuário com e-mail $desiredEmail não encontrado.');
-        }
-      } else {
-        print('Lista de usuários vazia.');
+        final user = users.firstWhere((user) {
+          if (user.email == emailAdmin.trim()) {
+            return user.isAdminUser!;
+          }
+          return false;
+        });
+        isCheckInVerify = user.isAdminUser!;
       }
 
-      // for (var element in listOfMaps) {
-      //   if (element["email"].toString().contains(emailAdmin)) {
-      //     response.data['lista'];
-      //     return const Right(true);
-      //   }
-      // }
       return Right(isCheckInVerify);
     } catch (error) {
+      if (error is StateError) {
+        return Left(CantNotAdminFailure());
+      }
       return Left(throw UnimplementedError());
     }
   }

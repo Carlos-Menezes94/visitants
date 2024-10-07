@@ -73,12 +73,25 @@ class UserRegistrationPageState extends StatePage<UserRegistrationModule,
                       },
                     ),
                     TextFormField(
-                      // inputFormatters: [CPFMask.inputMask],
                       controller: controller.store.password,
                       decoration: const InputDecoration(labelText: 'Senha'),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return '[Por favor, insira uma senha]';
+                          return 'Por favor, insira uma senha';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: controller.store.confirmPassword,
+                      decoration:
+                          const InputDecoration(labelText: 'Confirma Senha'),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Por favor, insira uma senha';
+                        }
+                        if (value != controller.store.password.text) {
+                          return 'As senhas não estão iguais';
                         }
                         return null;
                       },

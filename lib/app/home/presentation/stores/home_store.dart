@@ -11,7 +11,7 @@ class HomeStore extends Store {
   bool isContactResidentWhatsApp = false;
 
   bool isExpanded = false;
-  bool isAdmin = false;
+  ValueNotifier<bool> isAdmin = ValueNotifier<bool>(false);
 
   ValueNotifier<VisitorModel> visitorData =
       ValueNotifier<VisitorModel>(VisitorModel(

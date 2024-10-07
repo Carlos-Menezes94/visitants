@@ -133,10 +133,12 @@ class HomeController extends Controller {
         emailAdmin: loginStore.firebaseAuth.value.currentUser!.email!);
 
     response.fold((failure) {
-      store.isAdmin = false;
+      store.isAdmin.value = false;
+      store.state.value = AppState.error();
+
       debugPrint(failure.message);
     }, (sucess) {
-      store.isAdmin = sucess;
+      store.isAdmin.value = sucess;
       store.state.value = AppState.success();
     });
   }

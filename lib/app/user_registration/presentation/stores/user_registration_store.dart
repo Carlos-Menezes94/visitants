@@ -7,6 +7,7 @@ import '../../data/models/user_registered_data_model.dart';
 class UserRegistrationStore extends Store {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
   ValueNotifier<UserRegisteredDataModel> userDataInformation =
       ValueNotifier<UserRegisteredDataModel>(UserRegisteredDataModel(
           name: "",

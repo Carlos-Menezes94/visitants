@@ -61,108 +61,116 @@ class HomePageState
             }
             return Padding(
               padding: const EdgeInsets.all(18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    "Olá, seja bem-vindo!",
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    "${controller.loginStore.firebaseAuth.value.currentUser!.email}",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: store.isAdmin ? Colors.red : Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(height: 100),
-                  SizedBox(
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        LoginModule.to.navigator
-                            .pushNamed(VisitorRegistrationPage.routeName);
-                      },
-                      child: const Text(
-                        "Cadastrar visitante",
-                        style: TextStyle(color: Colors.black),
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  return await controller.adminCheckIn();
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        "Olá, seja bem-vindo!",
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        controller.getListVisitor(context);
-                      },
-                      child: const Text(
-                        "Visitantes cadastrados",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: ((context) {
-                              return AlertDialog(
-                                content: const Text(
-                                    'Escolha como deseja falar com morador'),
-                                actions: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          store.isContactResidentWhatsApp =
-                                              true;
-                                          controller.contactResident();
-                                        },
-                                        child: const Text('WhatsApp'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          store.isContactResidentWhatsApp =
-                                              false;
-                                          controller.contactResident();
-                                        },
-                                        child: const Text('Ligação'),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            }));
-                      },
-                      child: const Text(
-                        "Ligar para morador",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Offstage(
-                    offstage: !store.isAdmin,
-                    child: SizedBox(
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          LoginModule.to.navigator
-                              .pushNamed(UserRegistrationPage.routeName);
-                        },
-                        child: const Text(
-                          "Cadastrar novo usuário",
-                          style: TextStyle(color: Colors.black),
+                      Text(
+                        "${controller.loginStore.firebaseAuth.value.currentUser!.email}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: store.isAdmin.value ? Colors.red : Colors.grey,
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 100),
+                      SizedBox(
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            LoginModule.to.navigator
+                                .pushNamed(VisitorRegistrationPage.routeName);
+                          },
+                          child: const Text(
+                            "Cadastrar visitante",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            controller.getListVisitor(context);
+                          },
+                          child: const Text(
+                            "Visitantes cadastrados",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: ((context) {
+                                  return AlertDialog(
+                                    content: const Text(
+                                        'Escolha como deseja falar com morador'),
+                                    actions: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              store.isContactResidentWhatsApp =
+                                                  true;
+                                              controller.contactResident();
+                                            },
+                                            child: const Text('WhatsApp'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              store.isContactResidentWhatsApp =
+                                                  false;
+                                              controller.contactResident();
+                                            },
+                                            child: const Text('Ligação'),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }));
+                          },
+                          child: const Text(
+                            "Ligar para morador",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Offstage(
+                        offstage: !store.isAdmin.value,
+                        child: SizedBox(
+                          height: 40,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              LoginModule.to.navigator
+                                  .pushNamed(UserRegistrationPage.routeName);
+                            },
+                            child: const Text(
+                              "Cadastrar novo usuário",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             );
           }),

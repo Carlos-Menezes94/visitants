@@ -52,9 +52,7 @@ class ListVisitorPageState
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  TextField(onChanged: (value) {
-                    
-                  },
+                  TextField(
                     decoration: InputDecoration(
                       labelText: 'Pesquisar visitante',
                       prefixIcon: const Icon(Icons.search),
@@ -141,7 +139,7 @@ class ListVisitorPageState
                                       ],
                                     ),
                                   ),
-                                  isExpanded: isExpanded,
+                                  isExpanded: true,
                                 ),
                               ],
                             );

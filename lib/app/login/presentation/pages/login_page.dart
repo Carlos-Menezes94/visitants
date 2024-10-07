@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:visitants/core/state.dart';
@@ -182,7 +183,12 @@ class LoginPageState
                               .pushNamed(NeedHelpPage.routeName);
                         },
                         child: const Text("Precisa de ajuda?"),
-                      )
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            _logout(context);
+                          },
+                          child: child)
                     ],
                   ),
                 ),
@@ -190,5 +196,27 @@ class LoginPageState
             }),
       ),
     );
+  }
+
+  Future<void> _logout(BuildContext context) async {
+    try {
+      await GoogleSignIn().signOut();
+      // Se você também estiver usando Firebase, pode adicionar FirebaseAuth.instance.signOut() aqui
+      // FirebaseAuth.instance.signOut();
+      // Limpar as informações de autenticação do usuário e navegar de volta para a tela de login ou a tela inicial do seu aplicativo.
+      // Navigator.pushReplacementNamed(context, '/login'); // Exemplo de navegação para a tela de login
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Logout do Google realizado com sucesso.'),
+        ),
+      );
+    } catch (error) {
+      print('Erro ao fazer logout do Google: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Erro ao fazer logout do Google. Tente novamente.'),
+        ),
+      );
+    }
   }
 }

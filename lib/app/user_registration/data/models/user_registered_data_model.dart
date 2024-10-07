@@ -38,7 +38,7 @@ class UserRegisteredDataModel extends HiveObject {
         password: json['password'] ?? " -- Empty -- ",
         occupation: json['occupation'] ?? " -- Empty -- ",
         dateTimeRegistration: json['dateTimeRegistration'] ?? " -- Empty -- ",
-        isAdminUser: json['isAdminUser'] == "false" );
+        isAdminUser: json['isAdminUser'] ?? false);
   }
 
   static List<UserRegisteredDataModel> fromJsonList(List<dynamic> jsonList) {
