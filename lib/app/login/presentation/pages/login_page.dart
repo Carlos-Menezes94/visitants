@@ -142,15 +142,15 @@ class LoginPageState
                               ),
                             ),
                             const SizedBox(height: 20),
-                            SignInButton(
-                              Buttons.google,
-                              text: "Sign up with Google",
-                              onPressed: () {
-                                controller.loginSocial();
-                                // _handleSignIn();
-                              },
-                              elevation: 2,
-                            ),
+                            // SignInButton(
+                            //   Buttons.google,
+                            //   text: "Sign up with Google",
+                            //   onPressed: () {
+                            //     controller.loginSocial();
+                            //     // _handleSignIn();
+                            //   },
+                            //   elevation: 2,
+                            // ),
                             const SizedBox(height: 60),
                             SizedBox(
                               height: 40,
