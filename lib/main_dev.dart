@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import 'app/home/presentation/home_module.dart';
 import 'app/login/presentation/login_module.dart';
@@ -44,8 +42,6 @@ Future<void> _firebaseConfig() async {
     };
   }
 }
-
-
 
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();

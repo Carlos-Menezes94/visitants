@@ -10,6 +10,8 @@ class LoginDataSourceImpl implements LoginDataSourceAbstract {
     FirebaseAuth authFirebase = FirebaseAuth.instance;
 
     try {
+      await GoogleSignIn().signOut();
+
       await authFirebase.signOut();
       return DataSourceResponse(data: "Logout realizado", success: true);
     } catch (errorData) {

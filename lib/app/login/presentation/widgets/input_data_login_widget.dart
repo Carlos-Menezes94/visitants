@@ -39,7 +39,7 @@ class _InputDataLoginWidgetState extends State<InputDataLoginWidget> {
           suffixIcon: widget.suffixIcon),
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Please enter your ${widget.labelText}';
+          return 'Por favor, insira ${widget.labelText}';
         }
         return null;
       },
